@@ -1,0 +1,11 @@
+# Application dependencies
+
+require:
+    - play
+    - com.fasterxml.jackson.core -> jackson-databind 2.5.3
+    - com.fasterxml.jackson.module -> jackson-module-jaxb-annotations 2.5.3
+    - org.hibernate -> hibernate-search 4.2.0.Final
+    - org.javatuples -> javatuples 1.2
+    - com.opencsv -> opencsv 3.3
+    - org.codehaus.jackson -> jackson-mapper-asl 1.9.11
+    - org.codehaus.jackson -> jackson-core-asl 1.9.11

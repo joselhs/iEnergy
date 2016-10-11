@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://sujetos.esios.ree.es/schemas/2014/04/01/PerfilConsumo-esios-MP/">
+  <xs:element xmlns:per="http://sujetos.esios.ree.es/schemas/2014/04/01/PerfilConsumo-esios-MP/" name="PerfilConsumoType">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:per="http://sujetos.esios.ree.es/schemas/2014/04/01/PerfilConsumo-esios-MP/" type="per:IdentificacionMensajeType" name="IdentificacionMensaje"/>
+        <xs:element xmlns:per="http://sujetos.esios.ree.es/schemas/2014/04/01/PerfilConsumo-esios-MP/" type="per:VersionMensajeType" name="VersionMensaje"/>
+        <xs:element xmlns:per="http://sujetos.esios.ree.es/schemas/2014/04/01/PerfilConsumo-esios-MP/" type="per:TipoMensajeType" name="TipoMensaje"/>
+        <xs:element xmlns:per="http://sujetos.esios.ree.es/schemas/2014/04/01/PerfilConsumo-esios-MP/" type="per:TipoProcesoType" name="TipoProceso"/>
+        <xs:element xmlns:per="http://sujetos.esios.ree.es/schemas/2014/04/01/PerfilConsumo-esios-MP/" type="per:TipoClasificacionType" name="TipoClasificacion"/>
+        <xs:element xmlns:per="http://sujetos.esios.ree.es/schemas/2014/04/01/PerfilConsumo-esios-MP/" type="per:IdentificacionRemitenteType" name="IdentificacionRemitente"/>
+        <xs:element xmlns:per="http://sujetos.esios.ree.es/schemas/2014/04/01/PerfilConsumo-esios-MP/" type="per:FuncionRemitenteType" name="FuncionRemitente"/>
+        <xs:element xmlns:per="http://sujetos.esios.ree.es/schemas/2014/04/01/PerfilConsumo-esios-MP/" type="per:IdentificacionDestinatarioType" name="IdentificacionDestinatario"/>
+        <xs:element xmlns:per="http://sujetos.esios.ree.es/schemas/2014/04/01/PerfilConsumo-esios-MP/" type="per:FuncionDestinatarioType" name="FuncionDestinatario"/>
+        <xs:element xmlns:per="http://sujetos.esios.ree.es/schemas/2014/04/01/PerfilConsumo-esios-MP/" type="per:FechaHoraMensajeType" name="FechaHoraMensaje"/>
+        <xs:element xmlns:per="http://sujetos.esios.ree.es/schemas/2014/04/01/PerfilConsumo-esios-MP/" type="per:HorizonteType" name="Horizonte"/>
+        <xs:element xmlns:per="http://sujetos.esios.ree.es/schemas/2014/04/01/PerfilConsumo-esios-MP/" type="per:SeriesTemporalesType" name="SeriesTemporales" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+  </xs:complexType>
+  </xs:element>
+  <xs:complexType name="IdentificacionMensajeType"> 
+        <xs:attribute type="xs:string" name="v"/>
+  </xs:complexType>
+  <xs:complexType name="VersionMensajeType">    
+        <xs:attribute type="xs:string" name="v"/>
+  </xs:complexType>
+  <xs:complexType name="TipoMensajeType">  
+        <xs:attribute type="xs:string" name="v"/>
+  </xs:complexType>
+  <xs:complexType name="TipoProcesoType">
+        <xs:attribute type="xs:string" name="v"/>
+  </xs:complexType>
+  <xs:complexType name="TipoClasificacionType">
+        <xs:attribute type="xs:string" name="v"/>
+  </xs:complexType>
+  <xs:complexType name="IdentificacionRemitenteType">
+        <xs:attribute type="xs:string" name="v"/>
+        <xs:attribute type="xs:string" name="codificacion"/>
+  </xs:complexType>
+  <xs:complexType name="FuncionRemitenteType">
+        <xs:attribute type="xs:string" name="v"/>
+  </xs:complexType>
+  <xs:complexType name="IdentificacionDestinatarioType">
+        <xs:attribute type="xs:string" name="v"/>
+        <xs:attribute type="xs:string" name="codificacion"/>
+  </xs:complexType>
+  <xs:complexType name="FuncionDestinatarioType">   
+        <xs:attribute type="xs:string" name="v"/>
+  </xs:complexType>
+  <xs:complexType name="FechaHoraMensajeType">    
+        <xs:attribute type="xs:dateTime" name="v"/>
+  </xs:complexType>
+  <xs:complexType name="HorizonteType">    
+        <xs:attribute type="xs:string" name="v"/>
+  </xs:complexType>
+  <xs:complexType name="IdentificacionSeriesTemporalesType">    
+        <xs:attribute type="xs:string" name="v" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="TipoPrecioType">    
+        <xs:attribute type="xs:string" name="v" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="IntervaloTiempoType">
+        <xs:attribute type="xs:string" name="v" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="ResolucionType">      
+        <xs:attribute type="xs:string" name="v" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="PosType">    
+        <xs:attribute type="xs:string" name="v" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="CtdType">     
+        <xs:attribute type="xs:string" name="v" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="IntervaloType">
+    <xs:sequence>
+      <xs:element xmlns:per="http://sujetos.esios.ree.es/schemas/2014/04/01/PerfilConsumo-esios-MP/" type="per:PosType" name="Pos"/>
+      <xs:element xmlns:per="http://sujetos.esios.ree.es/schemas/2014/04/01/PerfilConsumo-esios-MP/" type="per:CtdType" name="Ctd"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PeriodoType">
+    <xs:sequence>
+      <xs:element xmlns:per="http://sujetos.esios.ree.es/schemas/2014/04/01/PerfilConsumo-esios-MP/" type="per:IntervaloTiempoType" name="IntervaloTiempo"/>
+      <xs:element xmlns:per="http://sujetos.esios.ree.es/schemas/2014/04/01/PerfilConsumo-esios-MP/" type="per:ResolucionType" name="Resolucion"/>
+      <xs:element xmlns:per="http://sujetos.esios.ree.es/schemas/2014/04/01/PerfilConsumo-esios-MP/" type="per:IntervaloType" name="Intervalo" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SeriesTemporalesType">
+    <xs:sequence>
+      <xs:element xmlns:per="http://sujetos.esios.ree.es/schemas/2014/04/01/PerfilConsumo-esios-MP/" type="per:IdentificacionSeriesTemporalesType" name="IdentificacionSeriesTemporales"/>
+      <xs:element xmlns:per="http://sujetos.esios.ree.es/schemas/2014/04/01/PerfilConsumo-esios-MP/" type="per:TipoPrecioType" name="TipoPrecio"/>
+      <xs:element xmlns:per="http://sujetos.esios.ree.es/schemas/2014/04/01/PerfilConsumo-esios-MP/" type="per:PeriodoType" name="Periodo" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

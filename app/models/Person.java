@@ -1,6 +1,8 @@
 package models;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
+
+import models.Person.Role;
 import play.data.validation.Email;
 import play.data.validation.MinSize;
 import play.data.validation.Required;
@@ -12,6 +14,9 @@ import javax.persistence.*;
 @Entity
 public class Person extends AbstractDomainModel {
 
+	public static enum Role {
+        USER, ADMIN
+    }
 
     @Required
     public String firstname;
@@ -25,6 +30,10 @@ public class Person extends AbstractDomainModel {
     @MinSize(6)
     @Column(nullable=false)
     public String password;
+    
+    @Column(nullable=false)
+    @Enumerated(EnumType.STRING)
+    public Role role;
 
     @JsonIgnore
     public boolean enabled = true;

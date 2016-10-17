@@ -14,9 +14,6 @@ public class Dia extends AbstractDomainModel {
 	public Date fecha;
 	
 	@Required
-	public Boolean verano;
-	
-	@Required
 	public Double precioMedioDiaA;
 	
 	@Required
@@ -24,12 +21,6 @@ public class Dia extends AbstractDomainModel {
 	
 	@Required
 	public Double precioMedioDiaDHAP1;
-	
-	@Required
-	public Double precioMedioHorasA;
-	
-	@Required
-	public Double precioMedioHorasDHA;
 	
 	@Required
 	public Double sumatorioCoeficientesA;

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://sujetos.esios.ree.es/schemas/2014/04/01/PerfilConsumo-esios-MP/">
-  <xs:element xmlns:per="http://sujetos.esios.ree.es/schemas/2014/04/01/PerfilConsumo-esios-MP/" name="PerfilConsumoType">
+  <xs:element xmlns:per="http://sujetos.esios.ree.es/schemas/2014/04/01/PerfilConsumo-esios-MP/" name="PerfilConsumo">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:per="http://sujetos.esios.ree.es/schemas/2014/04/01/PerfilConsumo-esios-MP/" type="per:IdentificacionMensajeType" name="IdentificacionMensaje"/>

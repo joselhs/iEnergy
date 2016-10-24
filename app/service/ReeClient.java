@@ -27,6 +27,7 @@ import models.ree.perfiles.PeriodoType;
 import play.Logger;
 import play.Play;
 import play.data.validation.Validation;
+import play.db.jpa.JPA;
 import play.libs.WS;
 import play.libs.WS.HttpResponse;
 import play.libs.WS.WSRequest;
@@ -501,4 +502,15 @@ public class ReeClient {
 		object.save();
 	}
 	 
+
+	//ind dia = 0-->Lunes,...,6-->Domingo
+	public static Double calculaMediaDiasAño(int diaSemana){
+		Date fecha = CalendarUtil.sumarRestarDiasFecha(new Date(), -365);
+			 
+		Double mediaDia = (Double) JPA.em().createNativeQuery("select avg(precioMedioDiaA) from Dia d"+
+				" where (d.fecha >= :fecha AND WEEKDAY(d.fecha) = :dia)").setParameter("fecha", fecha).setParameter("dia",diaSemana).getSingleResult();
+			 
+			return mediaDia;
+	}
+	
 }

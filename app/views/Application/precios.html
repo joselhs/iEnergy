@@ -18,24 +18,57 @@
 	#{header/}
 	
 		<div id="container">
+			<table class="table table-bordered">
+				<tbody>
+					<tr>
+					
+						<td class="col-md-4">
+						
+							<div id="hidden-inputs">
+								<input type="hidden" id="preciosHoy" value="${preciosHoy}"/>
+								<input type="hidden" id="mediasDiasSemana" value="${mediasDiasSemana}"/>
+								
+							</div>
+							
+							
+							<div id="left-menu">
+								<label>Introduzca precio fijo</label><br/>
+								<input type="text"/>
+								<input type="button" value="Mostrar"/>
+						
+							</div>
+										
+						</td>
+						
+						<td class="col-md-1">
+							<div id="vertical-bar"></div>
+						</td>
+						
+						<td class="col-md-7">
+							
+							
+							<div id="charts-container">
 			
-			<div id="hidden-inputs">
-				<input type="hidden" id="preciosHoy" value="${preciosHoy}"/>
-			</div>
-			
-			
-			<div id="left-menu">
-				<input type="text"/>
-				<input type="button" value="Mostrar"/>
-		
-			</div>
-			
-			<div id="charts-container">
-			
-				<div id="precios-hoy-chart" style="width:800px"></div>
-			
-			</div>
-		
+								<div id="charts-buttons">
+									<input id="precios-dia-button" type="button" value="Dia"/>
+									<input id="precios-semana-button" type="button" value="Semana"/>
+									<input id="precios-meses-button" type="button" value="Meses"/>
+								</div>
+						
+								<div id="precios-dia-chart" style="width:800px"></div>
+								
+								<div id="precios-semana-chart" style="width:800px"></div>
+								
+								<div id="precios-meses-chart" style="width:800px"></div>
+						
+							</div>
+						
+						</td>
+					
+					</tr>
+				</tbody>
+			</table>
+
 		</div>
 	
 	</body>

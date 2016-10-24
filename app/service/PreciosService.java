@@ -34,4 +34,28 @@ public class PreciosService {
     	return data;
     }
 	
+	public static String getChartMediaDiasString(){
+    	String mediaDias = "[";
+    	Double media = new Double(0);
+    	
+    	for(int i=0;i<7;i++){
+    		//Para calcular medias desde origen usar ReeClient.calculaMediaDiasAño
+    		media = ReeClient.calculaMediaDiasAño(i);
+    		if(media == null){
+    			media=0.0;
+    		}
+    		String stringmedia = media.toString();
+    		
+    		if(media != 0.0){
+    			stringmedia=stringmedia.substring(0, 8);
+    		}
+    		mediaDias+=stringmedia+",";
+    	}
+    	
+    	mediaDias=mediaDias.substring(0,mediaDias.length()-1);
+    	mediaDias+="]";
+    	
+    	return mediaDias;
+    }
+	
 }

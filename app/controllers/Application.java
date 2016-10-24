@@ -10,10 +10,19 @@ import models.*;
 
 public class Application extends Controller {
 
-    public static void precios() {
+    public static void precios(){
         String preciosHoy = PreciosService.getChartDiaString(new Date());
+    	String mediasDiasSemana = PreciosService.getChartMediaDiasString();
     	
-    	render(preciosHoy);
+    	render(preciosHoy,mediasDiasSemana);
+    }
+    
+    public static void consumos(){
+    	render();
+    }
+    
+    public static void resumen(){
+    	render();
     }
 
 }

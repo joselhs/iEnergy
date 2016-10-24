@@ -3,7 +3,7 @@ ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #4da6ff;
+    background-color: #666666;
 }
 
 li {
@@ -19,5 +19,21 @@ li a {
 }
 
 li a:hover {
-    background-color: #0066cc;
+    background-color: #404040;
+}
+
+#charts-container {
+	display: block;
+
+}
+
+#charts-buttons {
+	display: inline-block;
+	align: center;
+}
+
+#vertical-bar {
+        border-left: 1px solid #ccc;
+        width:2px;
+        height:500px;
 }

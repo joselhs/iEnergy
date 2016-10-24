@@ -2,6 +2,7 @@
 	
 function dibujaChartPreciosHoras(data, selector){
 
+	//################ GRAFICA PRECIOS DIA POR HORAS ################
 	var chartPreciosHoras = new Highcharts.Chart({
 			
 		chart: {
@@ -67,3 +68,68 @@ function dibujaChartPreciosHoras(data, selector){
 		}]
 	});
 }	
+
+
+//################ GRAFICA PRECIOS MEDIOS POR DIAS DE LA SEMANA ################
+
+function dibujaChartMediasDias(data, selector){
+	var medias = JSON.parse(data);
+
+	var chartDiasSemana = new Highcharts.Chart({
+	  chart: {
+	  	renderTo: selector
+	  },
+
+	  title:{
+	  	text:""
+	  },
+
+      yAxis: {
+      	max: 0.14,
+      	min: 0.08,
+        title: {
+            text: 'Precio (€/kwh)'
+        }
+      },
+      
+      plotOptions: {
+      	column:{
+      		stacking:'normal'
+      	},
+        series: {
+            borderWidth: 0,
+            dataLabels: {
+                enabled: true,
+                format: '{point.y:.6f}'
+            },
+            marker: {
+                enabled: false
+            }
+        }
+      },
+
+      legend: {
+        	enabled: false
+    	},
+
+        exporting: {
+	        buttons: {
+	            contextButton: {
+                	enabled: false
+            	}    
+        	}
+    	},
+      xAxis: {
+          categories: ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo']
+      },
+
+      series: [{
+      	name: "Media precios por día de la semana",
+      	type: "column",
+      	name: "Ahorro",
+      	color: '#4A90E2',
+        data: [medias[0],medias[1],medias[2],medias[3],medias[4],medias[5],medias[6]],
+        dataLabels: false
+      }]
+  });
+}

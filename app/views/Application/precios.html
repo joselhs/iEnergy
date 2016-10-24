@@ -1,0 +1,43 @@
+#{extends 'standard.html'/}
+
+#{set 'moreScripts'}
+	<script type="text/javascript" src="@{'/public/lib/jquery.numeric.js'}"></script>
+	<script type="text/javascript" src="@{'/public/js/preciosAPI.js'}"></script>
+	<script type="text/javascript" src="@{'/public/js/precios.js'}"></script>
+
+#{/set}
+
+</!DOCTYPE html>
+<html lang="es">
+
+	<head>
+	    <title>Energy Saving - Precios</title>
+	</head>
+	
+	<body>
+	#{header/}
+	
+		<div id="container">
+			
+			<div id="hidden-inputs">
+				<input type="hidden" id="preciosHoy" value="${preciosHoy}"/>
+			</div>
+			
+			
+			<div id="left-menu">
+				<input type="text"/>
+				<input type="button" value="Mostrar"/>
+		
+			</div>
+			
+			<div id="charts-container">
+			
+				<div id="precios-hoy-chart" style="width:800px"></div>
+			
+			</div>
+		
+		</div>
+	
+	</body>
+
+</html>

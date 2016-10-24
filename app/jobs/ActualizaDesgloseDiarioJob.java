@@ -53,10 +53,7 @@ public class ActualizaDesgloseDiarioJob extends Job {
 			pvpc.save();
 			Logger.info("\nDesglose guardado en DB\n");
 		}
-//		
-//		
-//
-//		
+	
 		List<Septet<String,String,String,String,String,String,Boolean>> diashorasprecios = ReeClient.getPreciosHoras(object);
 		
 		ReeClient.setPreciosHoras(diashorasprecios);

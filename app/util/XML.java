@@ -27,16 +27,6 @@ public class XML {
 
 	public static ObjectMapper OM;
 	
-	public static void saveAsXML(Object o, boolean wrapped, File file) throws IOException{
-			if (wrapped) {
-				writeValueAsString(o, new FileWriter(file), new QName(
-						"com.insinno.jaxb.model", "wrapper"));
-			} else {
-				writeValueAsString(o, new FileWriter(file));
-			}
-
-	}
-
 	public static String writeValueAsString(Object o, boolean wrapped) {
 		if (wrapped) {
 			return writeValueAsString(o, new StringWriter(), new QName(

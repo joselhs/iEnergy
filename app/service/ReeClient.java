@@ -116,7 +116,6 @@ public class ReeClient {
 						 hora = intervalo.getPos().getV();
 						 coeficienteA = intervalo.getCtd().getV();
 						 Triplet<String,String,String> t = new Triplet<String,String,String>(fecha,hora,coeficienteA);
-//						 coeficientesA.put(hora, coeficienteA);
 						 tripletsA.add(t);
 					 } 
 				 } 

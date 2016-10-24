@@ -1,0 +1,18 @@
+#{extends 'main.html'/}
+
+#{set 'moreStyles'}
+    <link rel="stylesheet" href="@{'/public/stylesheets/main.css'}">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    
+    #{get 'moreStyles'/}
+#{/set}
+
+#{set 'moreScripts'}
+    <script type="text/javascript" src="@{'/public/lib/jquery-1.9.0.min.js'}"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    
+    #{get 'moreScripts'/}
+#{/set}
+
+
+#{doLayout /}

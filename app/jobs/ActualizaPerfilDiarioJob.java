@@ -23,7 +23,6 @@ import util.CalendarUtil;
 import util.XML;
 
 @On("0 1 0 * * ?")
-//@Every("1min")
 public class ActualizaPerfilDiarioJob extends Job {
 	
 	public void doJob() {	

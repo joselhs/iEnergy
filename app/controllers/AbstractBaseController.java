@@ -26,6 +26,7 @@ import plugins.JSONBinderPlugin;
 
 /**
  * @author Sebastian Beigel
+ * @company Insinno
  *
  */
 public class AbstractBaseController extends Controller {
@@ -43,32 +44,6 @@ public class AbstractBaseController extends Controller {
             renderJSON(JSONBinderPlugin.OM.writeValueAsString(o));
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
-
-    static void renderBinary(Blob file) {
-        if (!file.exists()) {
-            response.status = 404;
-        } else {
-            response.contentType = file.type();
-            renderBinary(file.getFile());
-        }
-    }
-
-    static void renderBinary(Blob file, String name) {
-        if (!file.exists()) {
-            response.status = 404;
-        } else {
-            response.contentType = file.type();
-            renderBinary(file.getFile(), name);
-        }
-    }
-
-    protected static void returnFile(File f) {
-        if (f.exists()) {
-            renderBinary(f);
-        } else {
-            response.status = 404;
         }
     }
 

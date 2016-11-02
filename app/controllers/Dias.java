@@ -21,6 +21,7 @@ import models.Dia;
 import play.db.jpa.JPA;
 import play.i18n.Messages;
 import play.mvc.With;
+import service.PreciosService;
 import service.ReeClient;
 import util.CalendarUtil;
 
@@ -60,23 +61,6 @@ public class Dias extends AbstractBaseController{
 //        		chartDiasDiscriminacionData, heatMapData);
     }
 	
-    public static void show(Integer id) {
-        notFoundIfNull(id);
-        Dia object = Dia.findById(id);
-        
-        renderShow(object);
-    }
-	
-	private static void renderShow(Dia object) {
-        notFoundIfNull(object);
-        List<Dia> coeficientes = Dia.findAll();
-        
-        render(request.controller + "/show.html", object, coeficientes);
-    }
-	
-	public static void create (){
-		renderShow(new Dia());
-	}
 	
     public static void delete(Integer id) {
         deleteModel(Dia.class, id);
@@ -87,15 +71,11 @@ public class Dias extends AbstractBaseController{
         
         validation.valid(object);
         if (validation.hasErrors()) {
-            renderShow(object);
+//            renderShow(object);
         }
         object.save();
         flash.success(Messages.get("crud.saved", object.getLabel()));
-        if (goBack) {
-            show(object.id);
-        } else {
-            redirect(request.controller + ".list");
-        }
+        
     }
     
     public static boolean existsInDB(Dia d){
@@ -106,6 +86,19 @@ public class Dias extends AbstractBaseController{
 			return false;
 		}
 	}
+    
+    
+    public static String getGraficaDiaSeleccionado(String fecha){
+    	//Formateando Fecha
+    	String[] subString = fecha.split("-");
+    	String fechaFormateada = subString[2]+"/"+subString[1]+"/"+subString[0];
+    	Date date = CalendarUtil.parseFecha(subString[2]+"/"+subString[1]+"/"+subString[0]);
+    	
+    	String preciosHoy = PreciosService.getChartDiaString(date);
+        String preciosHoyDisc = PreciosService.getChartDiaDiscriminacionString(date);
+        
+    	return preciosHoy+"/"+preciosHoyDisc;
+    }
     
     
 }

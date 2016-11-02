@@ -1,0 +1,73 @@
+#{extends 'standard.html'/}
+
+#{set 'moreScripts'}
+	<script type="text/javascript" src="@{'/public/js/consumosAPI.js'}"></script>
+	<script type="text/javascript" src="@{'/public/js/consumos.js'}"></script>
+
+#{/set}
+
+</!DOCTYPE html>
+<html lang="es">
+
+	<head>
+	    <title>Energy Saving - Consumos</title>
+	</head>
+	
+	<body>
+	#{header/}
+	
+		<div id="container">
+			<table class="table">
+				<tbody>
+					<tr>
+					
+						<td class="col-md-4">
+							<div id="left-menu">
+								<br/><br/>
+								<label>Cargue un fichero CSV</label><br/>
+								<div id="file-loader">
+									<div><input type="file" id="consumoFiles" name="csv"/></div>    
+									<br/>
+									<div><button id="read_consumo_file">Cargar</button></div>
+									<br/>
+								</div>
+							</div>
+										
+						</td>
+						
+						<td class="col-md-1">
+							<div id="vertical-bar"></div>
+						</td>
+						
+						<td class="col-md-7">
+							
+							<div id="charts-container">
+			
+								<div id="charts-buttons">
+									<input id="consumos-periodo-button" type="button" value="Periodo de facturación"/>
+									<input id="consumos-dia-button" type="button" value="Dia"/>
+									<input id="consumos-semana-button" type="button" value="Semana"/>
+									<input id="consumos-otros-button" type="button" value="Otras"/>
+								</div>
+								
+								<div id="consumos-periodo-chart" style="width:800px"></div>
+						
+								<div id="consumos-dia-chart" style="width:800px"></div>
+								
+								<div id="consumos-semana-chart" style="width:800px"></div>
+								
+								<div id="consumos-otros-chart" style="width:800px"></div>
+						
+							</div>
+						
+						</td>
+					
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+	
+	</body>
+
+</html>

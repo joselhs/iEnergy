@@ -3,7 +3,9 @@
 # ~~~~
 
 # Home page
+GET     /getgraficadia							Dias.getGraficaDiaSeleccionado
 GET     /                                       Application.precios
+
 
 # Ignore favicon requests
 GET     /favicon.ico                            404

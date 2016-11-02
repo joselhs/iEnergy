@@ -37,3 +37,8 @@ li a:hover {
         width:2px;
         height:500px;
 }
+
+td.col-md-4{
+	margin-top: 10px;
+    vertical-align: top;
+}

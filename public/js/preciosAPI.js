@@ -1,6 +1,14 @@
 
 	
-function dibujaChartPreciosHoras(data, selector){
+function dibujaChartPreciosHoras(data, precioUsuario, yMax, yMin, selector){
+	
+	precioUsuario = parseFloat(precioUsuario);
+	
+	//Creando data para usuario
+	dataUsuario = "["+precioUsuario+","+precioUsuario+","+precioUsuario+","+precioUsuario+","+precioUsuario+","+precioUsuario+","+precioUsuario+","
+		+precioUsuario+","+precioUsuario+","+precioUsuario+","+precioUsuario+","+precioUsuario+","+precioUsuario+","+precioUsuario+","+precioUsuario+","
+		+precioUsuario+","+precioUsuario+","+precioUsuario+","+precioUsuario+","+precioUsuario+","+precioUsuario+","+precioUsuario+","+precioUsuario+","
+		+precioUsuario+"]";
 
 	//################ GRAFICA PRECIOS DIA POR HORAS ################
 	var chartPreciosHoras = new Highcharts.Chart({
@@ -11,14 +19,12 @@ function dibujaChartPreciosHoras(data, selector){
 		},
 	
 		title:{
-			text:""
+			text:"Precios del día hora a hora"
 		},
 		        
 		yAxis: {
-		    //max: parseFloat(precioCaroDia)+0.001,
-		    //min: parseFloat(precioBaratoDia)-0.001,
-			max: 0.17,
-			min: 0.05,
+		    max: parseFloat(yMax)+0.001,
+		    min: parseFloat(yMin)-0.001,
 			tickInterval: 0.01,
 		    title: {
 		    	text: 'Precio (€/kwh)'
@@ -65,7 +71,15 @@ function dibujaChartPreciosHoras(data, selector){
 		 	dataLabels:false,
 		 	color: "#4A90E2",
 		  	data: JSON.parse(data)
-		}]
+		},
+	    {
+	        type: 'line',
+	        name: 'Precio Usuario',
+	        color: "#E88113",
+	        dataLabels: false,
+	        visible: true,
+	        data: JSON.parse(dataUsuario)
+	    }]
 	});
 }	
 
@@ -79,11 +93,9 @@ function dibujaChartMediasDias(data, selector){
 	  chart: {
 	  	renderTo: selector
 	  },
-
 	  title:{
-	  	text:""
+	  	text:"Precios medios por día de la semana"
 	  },
-
       yAxis: {
       	max: 0.14,
       	min: 0.08,
@@ -91,11 +103,7 @@ function dibujaChartMediasDias(data, selector){
             text: 'Precio (€/kwh)'
         }
       },
-      
       plotOptions: {
-      	column:{
-      		stacking:'normal'
-      	},
         series: {
             borderWidth: 0,
             dataLabels: {
@@ -107,11 +115,9 @@ function dibujaChartMediasDias(data, selector){
             }
         }
       },
-
       legend: {
         	enabled: false
     	},
-
         exporting: {
 	        buttons: {
 	            contextButton: {
@@ -126,10 +132,77 @@ function dibujaChartMediasDias(data, selector){
       series: [{
       	name: "Media precios por día de la semana",
       	type: "column",
-      	name: "Ahorro",
+      	name: "Precio medio",
       	color: '#4A90E2',
         data: [medias[0],medias[1],medias[2],medias[3],medias[4],medias[5],medias[6]],
-        dataLabels: false
+        dataLabels: true
       }]
   });
+}
+
+
+//################ GRAFICA PRECIOS MEDIOS POR DIAS DE LA SEMANA ################
+
+function dibujaChartMeses(data, selector){
+	
+	data = JSON.parse(data);
+
+	var chartMeses = new Highcharts.Chart({
+		
+		chart: {
+			renderTo: selector
+		},
+		title: {
+            text: 'Precios medios por mes del año'
+        },
+
+        legend: {
+        	enabled: false
+    	},
+
+        exporting: {
+	        buttons: {
+	            contextButton: {
+                	enabled: true
+            	}    
+        	}
+    	},
+        
+        yAxis: {
+        	max: 0.14,
+        	min: 0.06,
+        	tickinterval: 0.01,
+          title: {
+              text: 'Precio (€/kwh)'
+          }
+        },
+        
+        plotOptions: {
+          column:{
+      		stacking:'normal'
+      	  },
+          series: {
+              borderWidth: 0,
+              dataLabels: {
+                  enabled: true,
+                  format: '{point.y:.3f}'
+              },
+              marker: {
+                  enabled: false
+              }
+          }
+        },
+
+        xAxis: {
+            categories: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+        },
+
+        series: [{
+	        	name: "Precio medio",
+	        	color:"#4A90E2",
+	        	type: "column",
+	        	data: data,
+	        	dataLabels: false
+	    }]
+    });
 }

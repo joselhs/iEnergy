@@ -102,8 +102,9 @@
                     }
                 }
             }
-        },
-        stylesheets: [window.urls['rteCss']]
+        }
+        //,
+        //stylesheets: [window.urls['rteCss']]
     };
 
     var Wysihtml5 = function(el, options) {

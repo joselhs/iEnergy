@@ -513,4 +513,49 @@ public class ReeClient {
 			return mediaDia;
 	}
 	
+	public static Double calculaMediaPreciosMes(Integer mes, Integer año){
+		 List<Dia> diasMes = getDiasMes(mes,año);
+		 
+		 
+		 Double mediaMes = new Double(0);
+		 Double sumatorioDias = new Double(0);
+		 
+		 if(diasMes.isEmpty()){
+			 mediaMes = 0.0;
+		 }else{
+			 int i = 0;
+			 
+			 for(Dia dia : diasMes){
+				 if(dia == null || dia.precioMedioDiaA==null){
+					 sumatorioDias+=0;
+				 }else{
+					 sumatorioDias+=dia.precioMedioDiaA;
+					 i++;
+				 }
+				 
+			 }
+			 
+			 if(i==0){
+				 i=1;
+			 }
+			 mediaMes = sumatorioDias/i; 
+		 }
+		 
+		 
+		 return mediaMes;
+	 }
+	
+	public static List<Dia> getDiasMes(Integer mes, Integer año){
+		 List<Dia> todosDias = Dia.findAll();
+		 List<Dia> dias = new ArrayList<Dia>();
+		 
+		 for(Dia d : todosDias){
+			 if(CalendarUtil.getYear(d.fecha) == año && CalendarUtil.getMonth(d.fecha) == mes){
+				 dias.add(d);
+			 }
+		 }
+		 
+		 return dias;
+	 }
+	
 }

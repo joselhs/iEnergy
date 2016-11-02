@@ -18,24 +18,28 @@
 	#{header/}
 	
 		<div id="container">
-			<table class="table table-bordered">
+			<table class="table">
 				<tbody>
 					<tr>
 					
-						<td class="col-md-4">
-						
-							<div id="hidden-inputs">
+						<div id="hidden-inputs">
 								<input type="hidden" id="preciosHoy" value="${preciosHoy}"/>
+								<input type="hidden" id="preciosHoyDisc" value="${preciosHoyDisc}"/>
 								<input type="hidden" id="mediasDiasSemana" value="${mediasDiasSemana}"/>
-								
-							</div>
-							
-							
+								<input type="hidden" id="mediasMeses" value="${mediasMeses}"/>
+						</div>
+					
+						<td class="col-md-4">
 							<div id="left-menu">
+								<br/><br/>
 								<label>Introduzca precio fijo</label><br/>
-								<input type="text"/>
-								<input type="button" value="Mostrar"/>
-						
+								<input id="precio-fijo-usuario" type="text"/><br/>
+								<input id="mostrar-precio-usuario" type="button" value="Mostrar"/>
+								<input id="borrar-precio-usuario" type="button" value="Borrar"/>
+								<br/><br/>
+								<label>¿Precios con discriminación horaria?</label><br/>
+								<input type="radio" value="1" name="discriminacion"/>Si<br/>
+								<input type="radio" value="0" name="discriminacion" checked/>No
 							</div>
 										
 						</td>
@@ -53,6 +57,8 @@
 									<input id="precios-dia-button" type="button" value="Dia"/>
 									<input id="precios-semana-button" type="button" value="Semana"/>
 									<input id="precios-meses-button" type="button" value="Meses"/>
+									<input type="text" placeholder="aaaa-mm-dd" id="datepicker-precio"/>
+									<input type="hidden" id="fecha-seleccionada"/>
 								</div>
 						
 								<div id="precios-dia-chart" style="width:800px"></div>

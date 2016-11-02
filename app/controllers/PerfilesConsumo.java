@@ -63,7 +63,7 @@ public class PerfilesConsumo extends AbstractBaseController{
         deleteModel(PConsumo.class, id);
     }
 
-    public static void save(Integer id, PConsumo entry, boolean goBack, Integer objectId) {
+    public static void save(Integer id) {
     	PConsumo object = bindModel(PConsumo.class, id);
         
         validation.valid(object);
@@ -72,11 +72,7 @@ public class PerfilesConsumo extends AbstractBaseController{
         }
         object.save();
         flash.success(Messages.get("crud.saved", object.getLabel()));
-        if (goBack) {
-//            show(object.id);
-        } else {
-            redirect(request.controller + ".list");
-        }
+        
     }
     
     //TODO Ejecutar funcion UpdateValues con las fechas pasadas desde el formulario updatevalues.html del CRUD

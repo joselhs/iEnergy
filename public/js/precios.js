@@ -52,6 +52,8 @@ $(document).ready(function(){
 		$("#precios-dia-chart").css("display","block");
 		$("#precios-semana-chart").css("display","none");
 		$("#precios-meses-chart").css("display","none");
+		
+		$('#selector-fechas').css("display","inline");
 	});
 	
 	$("#precios-semana-button").click(function(){
@@ -60,6 +62,7 @@ $(document).ready(function(){
 		$("#precios-semana-chart").css("display","block");
 		$("#precios-meses-chart").css("display","none");
 		$("#precios-dia-chart").css("display","none");
+		$('#selector-fechas').css("display","none");
 		
 	});
 	
@@ -69,6 +72,7 @@ $(document).ready(function(){
 		$("#precios-semana-chart").css("display","none");
 		$("#precios-meses-chart").css("display","block");
 		$("#precios-dia-chart").css("display","none");
+		$('#selector-fechas').css("display","none");
 	});
 	
 	

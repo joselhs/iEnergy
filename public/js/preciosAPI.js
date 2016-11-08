@@ -27,12 +27,16 @@ function dibujaChartPreciosHoras(data, precioUsuario, yMax, yMin, selector){
 		    min: parseFloat(yMin)-0.001,
 			tickInterval: 0.01,
 		    title: {
-		    	text: 'Precio (€/kwh)'
+		    	text: 'Precio (€/kWh)'
 		    }
 		},
 	
 		legend: {
 			enabled: true
+	    },
+	    
+	    tooltip: {
+            valueSuffix: '€/kWh'
 	    },
 	
 		exporting: {
@@ -116,9 +120,12 @@ function dibujaChartMediasDias(data, selector){
         }
       },
       legend: {
-        	enabled: false
-    	},
-        exporting: {
+    	  enabled: false
+      },
+      tooltip: {
+    	  valueSuffix: '€/kWh'
+	  },
+      exporting: {
 	        buttons: {
 	            contextButton: {
                 	enabled: false
@@ -159,6 +166,9 @@ function dibujaChartMeses(data, selector){
         legend: {
         	enabled: false
     	},
+    	tooltip: {
+            valueSuffix: '€/kWh'
+	    },
 
         exporting: {
 	        buttons: {

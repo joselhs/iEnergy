@@ -28,7 +28,7 @@
 								<div id="file-loader">
 									<div><input type="file" id="consumoFiles" name="csv"/></div>    
 									<br/>
-									<div><button id="read_consumo_file">Cargar</button></div>
+									<div><button id="read-consumo-file">Cargar</button></div>
 									<br/>
 								</div>
 							</div>
@@ -50,13 +50,21 @@
 									<input id="consumos-otros-button" type="button" value="Otras"/>
 								</div>
 								
+								<div id="charts-buttons2">
+									<input id="tramos-button" type="button" value="Porcentaje por tramos"/>
+									<input id="laborables-button" type="button" value="Porcentaje según tipo de día"/>
+								</div>
+								
 								<div id="consumos-periodo-chart" style="width:800px"></div>
 						
 								<div id="consumos-dia-chart" style="width:800px"></div>
 								
 								<div id="consumos-semana-chart" style="width:800px"></div>
 								
-								<div id="consumos-otros-chart" style="width:800px"></div>
+								<div id="consumos-otros-chart" style="width:800px">
+									<div id="laborables-chart" style="width:800px"></div>
+									<div id="tramos-chart" style="width:800px"></div>
+								</div>
 						
 							</div>
 						

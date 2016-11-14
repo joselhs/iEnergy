@@ -30,38 +30,6 @@ import util.CalendarUtil;
 //@CRUD
 public class Dias extends AbstractBaseController{
 
-    public static void list(int page, String orderBy, String order) {
-        List<Dia> objects = getPaginatedList(Dia.find(getOrderByStatment(orderBy, order)), page);
-        Long count = Dia.count();
-//        String chartDiasData = Charts.getChartDiaString(new Date());
-//        String chartDiasDiscriminacionData = Charts.getChartDiaDiscriminacionString(new Date());
-//        String chartMeses2014Data = Charts.getChartMesesString(2014);
-//        String chartMeses2015Data = Charts.getChartMesesString(2015);
-//        String chartMediasDiasData = Charts.getChartMediaDiasString();
-//        String[] chartHorasMenorMayor = Charts.getChartHorasBarataACaraStringArray();
-//        String chartHoras = Charts.getChartHorasBarataACaraString();
-//        String chartPreciosMenorMayor = Charts.getChartPreciosBaratoACaroString();
-//        String precioBarato = Charts.getChartPrecioBaratoString(new Date());
-//        String precioCaro = Charts.getChartPrecioCaroString(new Date());
-//        String precioActual = Charts.getChartPrecioActualString();
-//        Integer horaBarata = Charts.getChartHoraBarataString(new Date());
-//        Integer horaCara = Charts.getChartHoraCaraString(new Date());
-//        Integer horaActual = Charts.getChartHoraActualString();
-////        String[] diaPrecioMasBarato = Charts.getDiaMasBaratoString();
-////        String[] diaPrecioMasCaro = Charts.getDiaMasCaroString();
-//        String precioMedioDia = Charts.getChartPrecioMedioDiaString(new Date(),24);
-//        String precioMedioDia12 = Charts.getChartPrecioMedioDiaString(new Date(),12);
-//        String precioMedioDia7 = Charts.getChartPrecioMedioDiaString(new Date(),7);
-//        
-//        String heatMapData = Charts.getMeansHeatMap(false);
-//        
-//        render(objects, count, page, orderBy, order,chartDiasData,chartMeses2014Data,chartMeses2015Data,chartMediasDiasData,
-//        		chartHorasMenorMayor, chartPreciosMenorMayor, chartHoras, precioBarato, precioCaro, precioActual,
-//        		horaBarata,horaCara,horaActual,precioMedioDia,precioMedioDia12,precioMedioDia7,
-//        		chartDiasDiscriminacionData, heatMapData);
-    }
-	
-	
     public static void delete(Integer id) {
         deleteModel(Dia.class, id);
     }
@@ -100,5 +68,276 @@ public class Dias extends AbstractBaseController{
     	return preciosHoy+"/"+preciosHoyDisc;
     }
     
+    
+    public static Double getPrecioMasBarato(Date date){
+		 String fecha = CalendarUtil.formatFecha(date, "dd/MM/yyyy");
+		 date = CalendarUtil.parseFecha(fecha);
+		 
+		 Double baratoA = new Double(1);
+
+		 Dia dia = Dia.find("byFecha", date).first();
+		 if(dia == null){
+			 baratoA = 0.0;
+		 }else{
+			List<PVPCHora> precios = PVPCHora.find("byFecha", dia.fecha).fetch();
+			 
+			for(PVPCHora precio : precios){
+				if(precio.TCUhA+precio.TEUhA < baratoA){
+					baratoA = precio.TCUhA+precio.TEUhA;
+				}
+			}
+		 }
+		 
+		 return baratoA;
+	 }
+	 
+    public static Double getPrecioMasCaro(Date date){
+		 String fecha = CalendarUtil.formatFecha(date, "dd/MM/yyyy");
+		 date = CalendarUtil.parseFecha(fecha);
+		 
+		 Double caroA = new Double(0);
+
+		 Dia dia = Dia.find("byFecha", date).first();
+		 if(dia == null){
+			 caroA = 0.0;
+		 }else{
+			List<PVPCHora> precios = PVPCHora.find("byFecha", dia.fecha).fetch();
+			 
+			for(PVPCHora precio : precios){
+				if(precio.TCUhA+precio.TEUhA > caroA){
+					caroA = precio.TCUhA+precio.TEUhA;
+				}
+			}
+		 }
+		 
+		 return caroA;
+	 }
+	 
+    public static Double getPrecioMasBaratoDiscriminacion(Date date){
+		 String fecha = CalendarUtil.formatFecha(date, "dd/MM/yyyy");
+		 date = CalendarUtil.parseFecha(fecha);
+		 
+		 Double baratoA = new Double(1);
+
+		 Dia dia = Dia.find("byFecha", date).first();
+		 if(dia == null){
+			 baratoA = 0.0;
+		 }else{
+			List<PVPCHora> precios = PVPCHora.find("byFecha", dia.fecha).fetch();
+			 
+			for(PVPCHora precio : precios){
+				if(precio.TCUhDHA+precio.TEUhDHA < baratoA){
+					baratoA = precio.TCUhDHA+precio.TEUhDHA;
+				}
+			}
+		 }
+		 
+		 return baratoA;
+	 }
+	 
+   public static Double getPrecioMasCaroDiscriminacion(Date date){
+		 String fecha = CalendarUtil.formatFecha(date, "dd/MM/yyyy");
+		 date = CalendarUtil.parseFecha(fecha);
+		 
+		 Double caroA = new Double(0);
+
+		 Dia dia = Dia.find("byFecha", date).first();
+		 if(dia == null){
+			 caroA = 0.0;
+		 }else{
+			List<PVPCHora> precios = PVPCHora.find("byFecha", dia.fecha).fetch();
+			 
+			for(PVPCHora precio : precios){
+				if(precio.TCUhDHA+precio.TEUhDHA > caroA){
+					caroA = precio.TCUhDHA+precio.TEUhDHA;
+				}
+			}
+		 }
+		 
+		 return caroA;
+	 }
+   
+   
+   public static Integer getHoraMasBarata(Date date){
+		 String fecha = CalendarUtil.formatFecha(date, "dd/MM/yyyy");
+		 date = CalendarUtil.parseFecha(fecha);
+		 
+		 Double baratoA = new Double(1);
+		 Integer hora = 0;
+
+		 Dia dia = Dia.find("byFecha", date).first();
+		 if(dia == null){
+			 baratoA = 0.0;
+		 }else{
+			List<PVPCHora> precios = PVPCHora.find("byFecha", dia.fecha).fetch();
+			 
+			for(PVPCHora precio : precios){
+				if(precio.TCUhA+precio.TEUhA < baratoA){
+					baratoA = precio.TCUhA+precio.TEUhA;
+					hora = precio.hora;
+				}
+			}
+		 }
+		 
+		 return hora;
+	 }
+	 
+  public static Integer getHoraMasCara(Date date){
+		 String fecha = CalendarUtil.formatFecha(date, "dd/MM/yyyy");
+		 date = CalendarUtil.parseFecha(fecha);
+		 
+		 Double caroA = new Double(0);
+		 Integer hora = 0;
+
+		 Dia dia = Dia.find("byFecha", date).first();
+		 if(dia == null){
+			 caroA = 0.0;
+		 }else{
+			List<PVPCHora> precios = PVPCHora.find("byFecha", dia.fecha).fetch();
+			 
+			for(PVPCHora precio : precios){
+				if(precio.TCUhA+precio.TEUhA > caroA){
+					caroA = precio.TCUhA+precio.TEUhA;
+					hora = precio.hora;
+				}
+			}
+		 }
+		 
+		 return hora;
+	 }
+	 
+  	public static Integer getHoraMasBarataDiscriminacion(Date date){
+		 String fecha = CalendarUtil.formatFecha(date, "dd/MM/yyyy");
+		 date = CalendarUtil.parseFecha(fecha);
+		 
+		 Double baratoA = new Double(1);
+		 Integer hora = 0;
+		 
+		 Dia dia = Dia.find("byFecha", date).first();
+		 if(dia == null){
+			 baratoA = 0.0;
+		 }else{
+			List<PVPCHora> precios = PVPCHora.find("byFecha", dia.fecha).fetch();
+			 
+			for(PVPCHora precio : precios){
+				if(precio.TCUhDHA+precio.TEUhDHA < baratoA){
+					baratoA = precio.TCUhDHA+precio.TEUhDHA;
+					hora = precio.hora;
+				}
+			}
+		 }
+		 
+		 return hora;
+	 }
+	 
+	 public static Integer getHoraMasCaraDiscriminacion(Date date){
+			 String fecha = CalendarUtil.formatFecha(date, "dd/MM/yyyy");
+			 date = CalendarUtil.parseFecha(fecha);
+			 
+			 Double caroA = new Double(0);
+			 Integer hora = 0;
+			 Dia dia = Dia.find("byFecha", date).first();
+			 if(dia == null){
+				 caroA = 0.0;
+			 }else{
+				List<PVPCHora> precios = PVPCHora.find("byFecha", dia.fecha).fetch();
+				 
+				for(PVPCHora precio : precios){
+					if(precio.TCUhDHA+precio.TEUhDHA > caroA){
+						caroA = precio.TCUhDHA+precio.TEUhDHA;
+						hora=precio.hora;
+					}
+				}
+			 }
+			 
+		return hora;
+	}
+ 
+	public static String getDiaMasBarato(){
+	 	Double media = new Double(0);
+	 	Double mediaMasBarata = new Double(1);
+	 	String diaMasBarato = "";
+	 	Integer diaMasBaratoInt = 0;
+	 	
+	 	for(int i=0;i<7;i++){
+	 		//Para calcular medias desde origen usar ReeClient.calculaMediaDiasAño
+	 		media = ReeClient.calculaMediaDiasAño(i);
+	 		
+	 		if(media < mediaMasBarata){
+	 			mediaMasBarata=media;
+	 			diaMasBaratoInt=i;
+	 		}
+	 	}
+	 	
+	 	switch(diaMasBaratoInt){
+	 	case 0:
+	 		diaMasBarato="Lunes";
+	 		break;
+	 	case 1:
+	 		diaMasBarato="Martes";
+	 		break;
+	 	case 2:
+	 		diaMasBarato="Miércoles";
+	 		break;
+	 	case 3:
+	 		diaMasBarato="Jueves";
+	 		break;
+	 	case 4:
+	 		diaMasBarato="Viernes";
+	 		break;
+	 	case 5:
+	 		diaMasBarato="Sabado";
+	 		break;
+	 	case 6:
+	 		diaMasBarato="Domingo";
+	 		break;
+	 	}
+	 	
+	 	return diaMasBarato;
+	}
+
+
+	public static String getDiaMasCaro(){
+	 	Double media = new Double(0);
+	 	Double mediaMasCara = new Double(0);
+	 	String diaMasCaro = "";
+	 	Integer diaMasCaroInt = 0;
+	 	
+	 	for(int i=0;i<7;i++){
+	 		media = ReeClient.calculaMediaDiasAño(i);
+	 		
+	 		if(media > mediaMasCara){
+	 			mediaMasCara=media;
+	 			diaMasCaroInt=i;
+	 		}
+	 	}
+	 	
+	 	switch(diaMasCaroInt){
+	 	case 0:
+	 		diaMasCaro="Lunes";
+	 		break;
+	 	case 1:
+	 		diaMasCaro="Martes";
+	 		break;
+	 	case 2:
+	 		diaMasCaro="Miércoles";
+	 		break;
+	 	case 3:
+	 		diaMasCaro="Jueves";
+	 		break;
+	 	case 4:
+	 		diaMasCaro="Viernes";
+	 		break;
+	 	case 5:
+	 		diaMasCaro="Sabado";
+	 		break;
+	 	case 6:
+	 		diaMasCaro="Domingo";
+	 		break;
+	 	}
+	 	
+	 	return diaMasCaro;
+	}
+ 
     
 }

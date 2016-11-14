@@ -6,7 +6,6 @@ import org.javatuples.Quartet;
 
 import com.jamonapi.utils.Logger;
 
-import jobs.UpdateAllCoeficientesJob;
 import models.PConsumo;
 import models.Person;
 import models.Person.Role;

@@ -9,7 +9,6 @@ import org.javatuples.Septet;
 
 import com.jamonapi.utils.Logger;
 
-import jobs.UpdateAllPreciosJob;
 import models.DesgloseHorario;
 import models.PVPCHora;
 import models.Person;

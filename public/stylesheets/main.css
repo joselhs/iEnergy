@@ -42,3 +42,22 @@ td.col-md-4{
 	margin-top: 10px;
     vertical-align: top;
 }
+
+.precio{
+	margin-left: 7px;
+	margin-bottom: 10px;
+}
+
+.barato{
+	color: green;
+	font-weight: bold;
+}
+
+.caro{
+	color: red;
+	font-weight: bold;
+}
+
+.bombilla{
+	margin-top: 10px;
+}

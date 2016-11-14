@@ -10,6 +10,28 @@
 	<body>
 	#{header/}
 	
+		<div id="consejos-precios">
+			<h3><strong>Precios</strong></h3>
+			<img class="bombilla" src="@{'/public/images/energia-symbol.png'}"/><span class="precio">El mejor momento para consumir del día de hoy es a las <strong>${horaBarataA}:00</strong>!! (<span class="barato">${precioBaratoA}</span>€/kWh)</span><br/>
+			<img class="bombilla" src="@{'/public/images/energia-symbol.png'}"/><span class="precio">Es mejor que evites consumir a las <strong>${horaCaraA}:00</strong>. (<span class="caro">${precioCaroA}</span>€/kWh)</span><br/>
+			<img class="bombilla" src="@{'/public/images/energia-symbol.png'}"/><span class="precio">Si tienes discriminación horaria el mejor momento para consumir es a las <strong>${horaBarataDHA}:00</strong>!! (<span class="barato">${precioBaratoDHA}</span>€/kWh)</span><br/>
+			<img class="bombilla" src="@{'/public/images/energia-symbol.png'}"/><span class="precio">Si tienes discriminación horaria el peor momento para consumir es a las <strong>${horaCaraDHA}:00</strong>!! (<span class="caro">${precioCaroDHA}</span>€/kWh)</span><br/>
+			<img class="bombilla" src="@{'/public/images/energia-symbol.png'}"/><span class="precio">De media, el día más barato para consumir es el <span class="barato">${diaMasBarato}</span>!!</span><br/>
+			<img class="bombilla" src="@{'/public/images/energia-symbol.png'}"/><span class="precio">Deberías evitar usar electrodomésticos de alto consumo como lavadoras los <span class="caro">${diaMasCaro}</span>, ya que de media es el día más caro.</span><br/>
+		</div>
+		<br/>
+		<div id="consejos-consumos">
+			<h3><strong>Consumos</strong></h3>
+			<div id="consejos-consumos-defecto">
+			
+			</div>
+			
+			<div id="consejos-consumos-personalizados">
+			
+			</div>
+			
+		</div>
+		
 	</body>
 
 </html>

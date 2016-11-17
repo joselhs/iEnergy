@@ -15,8 +15,17 @@
 	</head>
 	
 	<body>
-	#{header/}
 	
+	#{if user}	
+		#{headerregistered/}	
+		<br/>
+		<strong>Bienvenido ${user}!</strong>
+		
+	#{/if}
+	#{else}
+		#{header/}
+	#{/else}
+		
 		<div id="container">
 			<table class="table">
 				<tbody>

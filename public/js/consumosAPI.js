@@ -783,3 +783,89 @@ function dibujaChartPorcentajeConsumoHorasBaratas(resultsArray, selector){
         }]
     });
 }
+
+
+function getDiaMayorConsumo(consumoDiasSemanaArray){
+	var diaMayorConsumo = "";
+	var index = 0;
+	var consumo = 0;
+	
+	for(var i=0;i<7;i++){
+		console.log(consumoDiasSemanaArray[i]);
+		if(parseFloat(consumoDiasSemanaArray[i]) > consumo){
+			
+			consumo = parseFloat(consumoDiasSemanaArray[i]);
+			index = i;
+		}
+	}
+	
+	console.log("index");
+	console.log(index);
+	
+	switch(index){
+	case 0:
+		diaMayorConsumo="Lunes";
+		break;
+	case 1:
+		diaMayorConsumo="Martes";
+		break;
+	case 2:
+		diaMayorConsumo="Miércoles";
+		break;
+	case 3:
+		diaMayorConsumo="Jueves";
+		break;
+	case 4:
+		diaMayorConsumo="Viernes";
+		break;
+	case 5:
+		diaMayorConsumo="Sábado";
+		break;
+	case 6:
+		diaMayorConsumo="Domingo";
+		break;
+	}
+	
+	return diaMayorConsumo;
+}
+
+
+function getDiaMenorConsumo(consumoDiasSemanaArray){
+	var diaMenorConsumo = "";
+	var index = 0;
+	var consumo = 100;
+	
+	for(var i=0;i<7;i++){
+		console.log(consumoDiasSemanaArray[i]);
+		if(parseFloat(consumoDiasSemanaArray[i]) < consumo){
+			consumo = parseFloat(consumoDiasSemanaArray[i]);
+			index = i;
+		}
+	}
+	
+	switch(index){
+	case 0:
+		diaMenorConsumo="Lunes";
+		break;
+	case 1:
+		diaMenorConsumo="Martes";
+		break;
+	case 2:
+		diaMenorConsumo="Miércoles";
+		break;
+	case 3:
+		diaMenorConsumo="Jueves";
+		break;
+	case 4:
+		diaMenorConsumo="Viernes";
+		break;
+	case 5:
+		diaMenorConsumo="Sábado";
+		break;
+	case 6:
+		diaMenorConsumo="Domingo";
+		break;
+	}
+	
+	return diaMenorConsumo;
+}

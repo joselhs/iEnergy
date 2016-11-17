@@ -1,0 +1,18 @@
+
+
+Hola ${user.firstname},
+
+estos son las horas más caras y más baratas para consumir en el día de hoy:
+
+* La hora más cara es a las ${horaMasCara}:00 (${precioMasCaro}€/kWh)
+* La hora más barata es a las ${horaMasBarata}:00 (${precioMasBarato}€/kWh)
+
+Y si dispones de DISCRIMINACIÓN HORARIA:
+
+* La hora más cara es a las ${horaMasCaraDiscriminacion}:00 (${precioMasCaroDiscriminacion}€/kWh)
+* La hora más barata es a las ${horaMasBarataDiscriminacion}:00 (${precioMasBaratoDiscriminacion}€/kWh)
+
+
+Gracias por confiar en Energy Saving,
+
+Que tengas un buen día!!

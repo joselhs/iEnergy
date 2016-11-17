@@ -1,0 +1,36 @@
+#{extends 'standard.html'/}
+
+
+</!DOCTYPE html>
+<html lang="es">
+
+	<head>
+	    <title>Energy Saving - Register</title>
+	</head>
+	
+	<body>
+	#{header/}
+	
+	<h3>Registro de usuario</h3>
+		
+		<div id="validation"></div>
+		#{form @Users.create()}
+		<div id="box">
+			<form id="register-form">
+				<label>Nombre</label><br/>
+				<input placeholder="Introduzca su nombre" id="firstname" type="text" name="firstname" required/><br/><br/>
+				<label>Apellidos</label><br/>
+				<input placeholder="Introduzca sus apellidos" id="lastname" type="text" name="lastname" required/><br/><br/>
+				<label>Email</label><br/>
+				<input placeholder="email@dominio.com" id="email" type="email" name="email" required/><br/><br/>
+				<label>Password</label><br/>
+				<input placeholder="Al menos 6 caracteres" pattern=".{6,}"id="password" type="password" name="password" required/><br/><br/>
+				<br/>
+				<input type="submit" value="Enviar"/>
+			</form>
+		</div>
+		#{/form}
+
+	</body>
+
+</html>

@@ -1,0 +1,35 @@
+#{extends 'standard.html'/}
+
+</!DOCTYPE html>
+<html lang="es">
+
+	<head>
+	    <title>Energy Saving - Registro</title>
+	</head>
+	
+	<body>
+	#{header/}
+	
+	<h2>Registro de usuario</h2>
+		
+		<div id="validation"></div>
+		#{form @create()}
+		<div id="box">
+			<div id="register-form">
+				<label>Nombre</label><br/>
+				<input id="firstname" type="text" name="firstname"/><br/><br/>
+				<label>Apellidos</label><br/>
+				<input id="lastname" type="text" name="lastname"/><br/><br/>
+				<label>Email</label><br/>
+				<input id="email" type="text" name="email"/><br/><br/>
+				<label>Password</label><br/>
+				<input id="password" type="password" name="password"/><br/><br/>
+				<br/>
+				<input type="submit" value="Enviar"/>
+			</div>
+		</div>
+		#{/form}
+
+	</body>
+
+</html>

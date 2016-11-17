@@ -13,8 +13,6 @@ import com.jamonapi.utils.Logger;
 
 import models.PConsumo;
 import models.PVPCHora;
-import models.Person;
-import models.Person.Role;
 import models.CoeficientePerfiladoHora;
 import models.DesgloseHorario;
 import models.Dia;
@@ -26,8 +24,6 @@ import service.ReeClient;
 import util.CalendarUtil;
 
 
-//@With(Secure.class)
-//@CRUD
 public class Dias extends AbstractBaseController{
 
     public static void delete(Integer id) {
@@ -39,7 +35,7 @@ public class Dias extends AbstractBaseController{
         
         validation.valid(object);
         if (validation.hasErrors()) {
-//            renderShow(object);
+
         }
         object.save();
         flash.success(Messages.get("crud.saved", object.getLabel()));
@@ -286,7 +282,7 @@ public class Dias extends AbstractBaseController{
 	 		diaMasBarato="Viernes";
 	 		break;
 	 	case 5:
-	 		diaMasBarato="Sabado";
+	 		diaMasBarato="Sábado";
 	 		break;
 	 	case 6:
 	 		diaMasBarato="Domingo";
@@ -329,7 +325,7 @@ public class Dias extends AbstractBaseController{
 	 		diaMasCaro="Viernes";
 	 		break;
 	 	case 5:
-	 		diaMasCaro="Sabado";
+	 		diaMasCaro="Sábado";
 	 		break;
 	 	case 6:
 	 		diaMasCaro="Domingo";

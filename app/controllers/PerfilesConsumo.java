@@ -7,8 +7,6 @@ import org.javatuples.Quartet;
 import com.jamonapi.utils.Logger;
 
 import models.PConsumo;
-import models.Person;
-import models.Person.Role;
 import models.ree.perfiles.PerfilConsumo;
 import play.Play;
 import play.i18n.Messages;

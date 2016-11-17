@@ -11,7 +11,7 @@ import org.codehaus.jackson.type.TypeReference;
 
 import javax.persistence.NoResultException;
 import models.AbstractDomainModel;
-import models.Person;
+import models.User;
 import play.Logger;
 import play.Play;
 import play.data.binding.Binder;
@@ -175,8 +175,8 @@ public class AbstractBaseController extends Controller {
         return Play.configuration.getProperty("resources.path");
     }
 
-    protected static Person getLoggedInPerson() {
-        return (Person) renderArgs.get("user");
+    protected static User getLoggedInPerson() {
+        return (User) renderArgs.get("user");
     }
     
 }

@@ -22,7 +22,7 @@ import service.ReeClient;
 import util.CalendarUtil;
 import util.XML;
 
-@On("0 1 0 * * ?")
+@On("0 30 17 * * ?")
 public class ActualizaPerfilDiarioJob extends Job {
 	
 	public void doJob() {	

@@ -11,6 +11,14 @@ import models.*;
 
 public class Application extends Controller {
 
+	@Before
+    static void setConnectedUser() {
+        if(Security.isConnected()) {
+            User user = User.find("byEmail", Security.connected()).first();
+            renderArgs.put("user", user.firstname);
+        }
+    }
+	
     public static void precios(){
         String preciosHoy = PreciosService.getChartDiaString(new Date());
         String preciosHoyDisc = PreciosService.getChartDiaDiscriminacionString(new Date());
@@ -39,6 +47,10 @@ public class Application extends Controller {
     	
     	render(precioBaratoA,precioCaroA,precioBaratoDHA,precioCaroDHA, horaBarataA, horaCaraA, 
     			horaBarataDHA, horaCaraDHA, diaMasBarato, diaMasCaro);
+    }
+    
+    public static void register(){
+    	render();
     }
 
 }

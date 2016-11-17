@@ -3,14 +3,9 @@ package controllers;
 import java.util.List;
 
 import models.CoeficientePerfiladoHora;
-import models.Person;
-import models.Person.Role;
 import play.i18n.Messages;
 import play.mvc.With;
 
-
-//@With(Secure.class)
-//@CRUD
 public class CoeficientesPerfiladoHoras extends AbstractBaseController{
 	
 	

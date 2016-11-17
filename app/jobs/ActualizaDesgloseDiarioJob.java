@@ -21,8 +21,7 @@ import service.ReeClient;
 import util.CalendarUtil;
 import util.XML;
 
-@On("0 3 0 * * ?")
-//@Every("2min")
+@On("0 32 17 * * ?")
 public class ActualizaDesgloseDiarioJob extends Job {
 	
 	public void doJob() {	

@@ -4,8 +4,6 @@ import java.util.List;
 
 import models.CoeficientePerfiladoHora;
 import models.PVPCHora;
-import models.Person;
-import models.Person.Role;
 import play.i18n.Messages;
 import play.mvc.With;
 

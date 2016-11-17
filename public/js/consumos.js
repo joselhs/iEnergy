@@ -115,6 +115,8 @@ $(document).ready(function(){
 			},
 			complete: function(){
 				console.log("El archivo fue parseado correctamente.");
+				var csvLoaded = true;
+				
 				
 				$("#consumos-periodo-button").prop("disabled",false);
 				$("#consumos-dia-button").prop("disabled",false);
@@ -140,7 +142,11 @@ $(document).ready(function(){
 				dibujaChartPorcentajeConsumoLaborablesFinSemana(consumoDiasSemanaArray, 'laborables-chart');
 				dibujaChartPorcentajeConsumoHorasBaratas(resultsArray, 'tramos-chart');
 				
-				
+				sessionStorage["loadedCSV"]=csvLoaded;
+				sessionStorage["porcentajeLaborables"]=porcentajeConsumoDiasLaborables(consumoDiasSemanaArray);
+				sessionStorage["porcentajeTramoBarato"]=calculaPorcentajeTramoBarato(resultsArray);
+				sessionStorage["diaMayorConsumo"]=getDiaMayorConsumo(mediasConsumoDiaSemanaArray);
+				sessionStorage["diaMenorConsumo"]=getDiaMenorConsumo(mediasConsumoDiaSemanaArray);
 			}
 		});
 	});

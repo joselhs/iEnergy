@@ -19,7 +19,7 @@
 		#{headerregistered/}	
 		<br/>
 		<strong>Bienvenido ${user}!</strong>	
-		
+		<input type="hidden" id="userId" value="${userId}" />
 	#{/if}
 	#{else}
 		#{header/}
@@ -40,6 +40,16 @@
 									<div><button id="read-consumo-file">Cargar</button></div>
 									<br/>
 								</div>
+							</div>
+							</br>
+							<div id="historico-ficheros">
+								#{if user}
+									<label><strong>Histórico de ficheros</strong></label></br></br>
+									#{list items:ficheros, as:'fichero'}
+									    ${fichero.mes} de ${fichero.año} - (${fichero.consumoTotal} kWh)</br>
+									    <input type="hidden" id="json" value="${fichero.json}" />
+									#{/list}
+								#{/if}
 							</div>
 										
 						</td>

@@ -16,10 +16,6 @@ import service.ReeClient;
 import util.CalendarUtil;
 import util.XML;
 
-
-
-//@With(Secure.class)
-//@CRUD
 public class PerfilesConsumo extends AbstractBaseController{
 
 		

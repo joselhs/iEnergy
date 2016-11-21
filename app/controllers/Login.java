@@ -14,7 +14,8 @@ public class Login extends Controller{
     static void setConnectedUser() {
         if(Security.isConnected()) {
             User user = User.find("byEmail", Security.connected()).first();
-            renderArgs.put("user", user.firstname);
+            renderArgs.put("id", user.id);
+            renderArgs.put("user", user.firstname);  
         }
     }
 	
@@ -25,7 +26,10 @@ public class Login extends Controller{
 		if(user != null){
 			// Mark user as connected
 	        session.put("email", email);
+
+	        renderArgs.put("id", user.id);
 	        renderArgs.put("user", user);
+	        
 	        redirect("Application.consumos");
 		}else{
 			redirect("Application.login");

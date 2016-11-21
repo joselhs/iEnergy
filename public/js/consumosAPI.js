@@ -39,7 +39,7 @@
 	//o para calcular el ahorro de un periodo
 	function getDiasPeriodo(resultsArray){
 		dias=[];
-
+		
 		for(var i=0;i<=resultsArray.length-1;i++){
 			var dateStr = resultsArray[i].data[0].Fecha.split("/");
 			
@@ -791,16 +791,11 @@ function getDiaMayorConsumo(consumoDiasSemanaArray){
 	var consumo = 0;
 	
 	for(var i=0;i<7;i++){
-		console.log(consumoDiasSemanaArray[i]);
 		if(parseFloat(consumoDiasSemanaArray[i]) > consumo){
-			
 			consumo = parseFloat(consumoDiasSemanaArray[i]);
 			index = i;
 		}
 	}
-	
-	console.log("index");
-	console.log(index);
 	
 	switch(index){
 	case 0:
@@ -836,7 +831,6 @@ function getDiaMenorConsumo(consumoDiasSemanaArray){
 	var consumo = 100;
 	
 	for(var i=0;i<7;i++){
-		console.log(consumoDiasSemanaArray[i]);
 		if(parseFloat(consumoDiasSemanaArray[i]) < consumo){
 			consumo = parseFloat(consumoDiasSemanaArray[i]);
 			index = i;

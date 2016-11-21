@@ -8,7 +8,7 @@
 # Home page
 GET     /getgraficadia							Dias.getGraficaDiaSeleccionado
 GET     /                                       Application.precios
-
+POST	/addconsumofile							FicherosConsumo.save
 
 # Ignore favicon requests
 GET     /favicon.ico                            404

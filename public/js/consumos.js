@@ -17,7 +17,58 @@ $(document).ready(function(){
 	
 	dibujaChartConsumoDiasPeriodoFacturacion(null, null, "consumos-periodo-chart");
 
+	var userId = $('#userId').val();
+	var meses = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
 	
+	//#################################################################################################################
+	//Cuando entramos en la vista, si previamente había cargado un archivo CSV, se mantiene y se vuelve a dibujar todo
+	//#################################################################################################################
+	var loadedCSV = sessionStorage["loadedCSV"];
+	
+	if(loadedCSV){
+		
+		$("#consumos-periodo-button").prop("disabled",false);
+		$("#consumos-dia-button").prop("disabled",false);
+		$("#consumos-semana-button").prop("disabled",false);
+		$("#consumos-otros-button").prop("disabled",false);
+		
+		var dataArray = [];
+		dataArray[0] = JSON.parse(sessionStorage["result"]);
+		
+		//Dibuja gráfica consumo medio de cada día de la semana de los datos del CSV
+		mediasConsumoDiaSemanaArray = calculaMediasDiasSemana(dataArray);
+		dibujaChartMediasDiasSemana(mediasConsumoDiaSemanaArray,"consumos-semana-chart");
+		
+		//Dibuja gráfica consumo por cada día del periodo contenido en los datos del CSV
+		consumosPorDiaMesArray = calculaConsumoDiasPeriodoFacturacion(dataArray);
+		diasPeriodo = getDiasPeriodo(dataArray);
+		dibujaChartConsumoDiasPeriodoFacturacion(consumosPorDiaMesArray,diasPeriodo,'consumos-periodo-chart');
+		
+		//Dibuja gráfica consumo por horas del día 
+		fechaStr = calculateMinDate(dataArray);
+		dataSet = createDayDataSet(fechaStr,dataArray);
+		dibujaChartConsumoHoras(JSON.stringify(dataSet), fechaStr, "consumos-dia-chart");
+		
+		//Dibuja las gráficas del apartado otros
+		consumoDiasSemanaArray = calculaConsumosDiasSemana(dataArray);
+		dibujaChartPorcentajeConsumoLaborablesFinSemana(consumoDiasSemanaArray, 'laborables-chart');
+		dibujaChartPorcentajeConsumoHorasBaratas(dataArray, 'tramos-chart');
+		
+		crearDatepicker(dataArray);
+
+		$("#datepicker-consumo").change(function(){
+			var preciosDia;
+			
+			fechaStr = $("#datepicker-consumo").val();
+
+			fechaStr = fechaStr.split("-");
+			fecha = fechaStr[2]+"/"+fechaStr[1]+"/"+fechaStr[0];
+			dataSet = createDayDataSet(fecha,dataArray);
+
+			dibujaChartConsumoHoras(JSON.stringify(dataSet),fecha,"consumos-dia-chart");
+		});
+		
+	}
 	
 	//################ BUTTONS ################
 	
@@ -147,6 +198,38 @@ $(document).ready(function(){
 				sessionStorage["porcentajeTramoBarato"]=calculaPorcentajeTramoBarato(resultsArray);
 				sessionStorage["diaMayorConsumo"]=getDiaMayorConsumo(mediasConsumoDiaSemanaArray);
 				sessionStorage["diaMenorConsumo"]=getDiaMenorConsumo(mediasConsumoDiaSemanaArray);
+				sessionStorage["result"]=JSON.stringify(resultsArray[0]);
+			
+				
+				if(userId != null){
+					var fecha = resultsArray[0].data[0].Fecha;
+					var fechaArray = fecha.split("/");
+					var mes = meses[parseInt(fechaArray[1])-1]
+					var jsonConsumo = JSON.stringify(resultsArray[0]);
+					var consumoTotal = getConsumoTotal(resultsArray);
+					var porcentajeLaborables = porcentajeConsumoDiasLaborables(consumoDiasSemanaArray);
+					var porcentajeTramoBarato = calculaPorcentajeTramoBarato(resultsArray);
+					
+					var jsonString = '{"userId":'+userId+', "fecha":"'+fecha+'","mes":"'+mes+'","año":"'+fechaArray[2]+'", "json":'+jsonConsumo+
+						', "consumoPorDia":"'+consumoDiasSemanaArray+'", "consumoTotal":'+consumoTotal.toFixed(2)+
+						', "porcentajeLaborables":'+porcentajeLaborables+',"porcentajeTramoBarato":'+porcentajeTramoBarato+'}';
+
+					
+					$.ajax({
+						url: "/addconsumofile",//url de destino
+						data: JSON.parse(jsonString),
+						type: "post",
+						dataType: "json",
+						
+						success: function(response){
+							
+						},
+					
+						error: function(xhr, status){
+							console.log("ERROR EN LA PETICIÓN");
+						}
+					});
+				}
 			}
 		});
 	});

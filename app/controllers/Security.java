@@ -11,6 +11,7 @@ public class Security extends Secure.Security{
 		
 		if(user != null && user.password.equals(password)){
 			allowed = true;
+			renderArgs.put("userId", user.id);
 		}else{
 			allowed = false;
 		}	

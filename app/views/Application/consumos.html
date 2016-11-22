@@ -46,7 +46,8 @@
 								#{if user}
 									<label><strong>Histórico de ficheros</strong></label></br></br>
 									#{list items:ficheros, as:'fichero'}
-									    <input type="button" id="button-${fichero.mes}-${fichero.año}" class="historico-button" value="${fichero.mes} de ${fichero.año} - (${fichero.consumoTotal} kWh)"/></br>
+									    <input type="button" id="button-${fichero.mes}-${fichero.año}" class="historico-button" 
+									    	value="${fichero.mes} de ${fichero.año} - (${fichero.consumoTotal} kWh)"/></br>
 									    <input type="hidden" id="json-${fichero.mes}-${fichero.año}" value="${fichero.json}" />
 									#{/list}
 								#{/if}

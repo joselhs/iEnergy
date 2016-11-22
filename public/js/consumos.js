@@ -249,6 +249,39 @@ $(document).ready(function(){
 				$("#consumos-semana-button").prop("disabled",false);
 				$("#consumos-otros-button").prop("disabled",false);
 				
+				if(userId != null){
+					var fecha = resultsArray[0].data[0].Fecha;
+					var fechaArray = fecha.split("/");
+					var mes = meses[parseInt(fechaArray[1])-1]
+					//var jsonConsumo = JSON.stringify(resultsArray[0]);
+					var jsonConsumo = getResultString(resultsArray[0]);
+					
+					var consumoTotal = getConsumoTotal(resultsArray);
+					var porcentajeLaborables = porcentajeConsumoDiasLaborables(consumoDiasSemanaArray);
+					var porcentajeTramoBarato = calculaPorcentajeTramoBarato(resultsArray);
+					
+					var jsonString = '{"userId":'+userId+', "fecha":"'+fecha+'","mes":"'+mes+'","año":"'+fechaArray[2]+'", "json":"'+jsonConsumo+
+						'", "consumoPorDia":"'+consumoDiasSemanaArray+'", "consumoTotal":'+consumoTotal.toFixed(2)+
+						', "porcentajeLaborables":'+porcentajeLaborables+',"porcentajeTramoBarato":'+porcentajeTramoBarato+'}';
+
+					
+					$.ajax({
+						url: "/addconsumofile",//url de destino
+						data: JSON.parse(jsonString),
+						type: "post",
+						dataType: "json",
+						
+						success: function(response){
+							console.log("PETICIÓN CORRECTA");
+							location.reload();
+						},
+					
+						error: function(xhr, status){
+							console.log("ERROR EN LA PETICIÓN "+status);
+						}
+					});
+				}
+				
 				//Dibuja gráfica consumo medio de cada día de la semana de los datos del CSV
 				mediasConsumoDiaSemanaArray = calculaMediasDiasSemana(resultsArray);
 				dibujaChartMediasDiasSemana(mediasConsumoDiaSemanaArray,"consumos-semana-chart");
@@ -282,37 +315,7 @@ $(document).ready(function(){
 				sessionStorage["mes"]=mes;
 				sessionStorage["año"]=año;
 				
-				if(userId != null){
-					var fecha = resultsArray[0].data[0].Fecha;
-					var fechaArray = fecha.split("/");
-					var mes = meses[parseInt(fechaArray[1])-1]
-					//var jsonConsumo = JSON.stringify(resultsArray[0]);
-					var jsonConsumo = getResultString(resultsArray[0]);
-					
-					var consumoTotal = getConsumoTotal(resultsArray);
-					var porcentajeLaborables = porcentajeConsumoDiasLaborables(consumoDiasSemanaArray);
-					var porcentajeTramoBarato = calculaPorcentajeTramoBarato(resultsArray);
-					
-					var jsonString = '{"userId":'+userId+', "fecha":"'+fecha+'","mes":"'+mes+'","año":"'+fechaArray[2]+'", "json":"'+jsonConsumo+
-						'", "consumoPorDia":"'+consumoDiasSemanaArray+'", "consumoTotal":'+consumoTotal.toFixed(2)+
-						', "porcentajeLaborables":'+porcentajeLaborables+',"porcentajeTramoBarato":'+porcentajeTramoBarato+'}';
-
-					
-					$.ajax({
-						url: "/addconsumofile",//url de destino
-						data: JSON.parse(jsonString),
-						type: "post",
-						dataType: "json",
-						
-						success: function(response){
-							console.log("PETICIÓN CORRECTA");
-						},
-					
-						error: function(xhr, status){
-							console.log("ERROR EN LA PETICIÓN "+status);
-						}
-					});
-				}
+				
 			}
 		});
 	});

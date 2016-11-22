@@ -10,6 +10,8 @@ $(document).ready(function(){
 		var porcentajeTramoBarato = sessionStorage["porcentajeTramoBarato"];
 		var diaMenorConsumo = sessionStorage["diaMenorConsumo"];
 		var diaMayorConsumo = sessionStorage["diaMayorConsumo"];
+		var año = sessionStorage["año"];
+		var mes = sessionStorage["mes"];
 		
 		var diaMasBarato = $("#diaMasBarato").val();
 		var diaMasCaro = $("#diaMasCaro").val();
@@ -45,6 +47,8 @@ $(document).ready(function(){
 		
 		$("#nocsv").css("display","none");
 		$("#recomendaciones-consumo").css("display","inline");
+		
+		$("#resumen-fecha").html(mes+" del "+año);
 	}else{
 		$("#nocsv").css("display","inline");
 		$("#recomendaciones-consumo").css("display","none");

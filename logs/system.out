@@ -1,0 +1,7 @@
+Listening for transport dt_socket at address: 8000
+01:49:57,724 INFO  ~ Starting /Users/josholsan/Documents/Projects/energySaving
+:: loading settings :: url = jar:file:/Applications/play-1.4.3/framework/lib/ivy-2.4.0.jar!/org/apache/ivy/core/settings/ivysettings.xml
+01:50:03,055 INFO  ~ Module secure is available (/Applications/play-1.4.3/modules/secure)
+01:50:03,657 WARN  ~ You're running Play! in DEV mode
+01:50:03,716 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...
+~ Server is up and running

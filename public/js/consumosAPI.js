@@ -863,3 +863,40 @@ function getDiaMenorConsumo(consumoDiasSemanaArray){
 	
 	return diaMenorConsumo;
 }
+
+
+function getResultString(json){
+	
+	var string ="";
+	
+	for(var i=0;i<json.data.length-1;i++){
+		string=string+";"+json.data[i].Fecha+"-"+json.data[i].Hora+"-"+json.data[i].Consumo_kWh;
+	}
+	
+	return string.substr(1,string.lenght);
+}
+
+
+function retrieveJSON(result){
+	var string='{"data":[';
+	
+	result = result.split(";");
+	
+	for(var i=0;i<result.length;i++){
+		var linea = result[i].split("-");
+		var fecha = linea[0];
+		var hora = linea[1];
+		var consumo = linea[2];
+		
+		string=string+'{"Fecha":"'+fecha+'","Hora":"'+hora+'","Consumo_kWh":"'+consumo+'"},';
+	}
+	
+	string=string.substr(0,string.length-1);
+	string=string+']}';
+	
+	return JSON.parse(string);
+}
+
+
+
+

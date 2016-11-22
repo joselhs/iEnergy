@@ -18,7 +18,7 @@ public class FicherosConsumo extends AbstractBaseController{
         deleteModel(FicheroConsumo.class, id);
     }
 
-    public static void save(Integer userId, String json, String fecha, String mes, String año, String consumoPorDia, 
+    public static boolean save(Integer userId, String json, String fecha, String mes, String año, String consumoPorDia, 
     		Double consumoTotal, Double porcentajeTramoBarato, Double porcentajeLaborables) {
     		
     	User usuario = User.findById(userId);
@@ -44,7 +44,10 @@ public class FicherosConsumo extends AbstractBaseController{
         	
         	f.save();
         	usuario.save();
+        	
+        	return true;
     	}
+    	return false;
     }
     
     public static boolean existsInDB(FicheroConsumo f){

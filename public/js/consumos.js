@@ -136,6 +136,81 @@ $(document).ready(function(){
 		
 	});
 	
+	
+	
+	//###########################################
+	//################ HISTORICO ################
+	//###########################################
+	$(".historico-button").click(function(){
+		var buttonId = this.id;
+		var elementId = buttonId.replace("button","json");
+		
+		var elementJson = retrieveJSON($("#"+elementId).val());
+		
+		$("#consumos-periodo-button").prop("disabled",false);
+		$("#consumos-dia-button").prop("disabled",false);
+		$("#consumos-semana-button").prop("disabled",false);
+		$("#consumos-otros-button").prop("disabled",false);
+		
+		var dataArray = [];
+		dataArray[0] = elementJson;
+		
+		//Dibuja gráfica consumo medio de cada día de la semana de los datos del CSV
+		mediasConsumoDiaSemanaArray = calculaMediasDiasSemana(dataArray);
+		dibujaChartMediasDiasSemana(mediasConsumoDiaSemanaArray,"consumos-semana-chart");
+		
+		//Dibuja gráfica consumo por cada día del periodo contenido en los datos del CSV
+		consumosPorDiaMesArray = calculaConsumoDiasPeriodoFacturacion(dataArray);
+		diasPeriodo = getDiasPeriodo(dataArray);
+		dibujaChartConsumoDiasPeriodoFacturacion(consumosPorDiaMesArray,diasPeriodo,'consumos-periodo-chart');
+		
+		//Dibuja gráfica consumo por horas del día 
+		fechaStr = calculateMinDate(dataArray);
+		dataSet = createDayDataSet(fechaStr,dataArray);
+		dibujaChartConsumoHoras(JSON.stringify(dataSet), fechaStr, "consumos-dia-chart");
+		
+		//Dibuja las gráficas del apartado otros
+		consumoDiasSemanaArray = calculaConsumosDiasSemana(dataArray);
+		dibujaChartPorcentajeConsumoLaborablesFinSemana(consumoDiasSemanaArray, 'laborables-chart');
+		dibujaChartPorcentajeConsumoHorasBaratas(dataArray, 'tramos-chart');
+		
+		var fecha = dataArray[0].data[0].Fecha;
+		var fechaArray = fecha.split("/");
+		var mes = meses[parseInt(fechaArray[1])-1]
+		var año = fechaArray[2];
+		
+		//Almacena en sesión los valores que usaremos en otras vistas
+		sessionStorage["loadedCSV"]=true;
+		sessionStorage["porcentajeLaborables"]=porcentajeConsumoDiasLaborables(consumoDiasSemanaArray);
+		sessionStorage["porcentajeTramoBarato"]=calculaPorcentajeTramoBarato(dataArray);
+		sessionStorage["diaMayorConsumo"]=getDiaMayorConsumo(mediasConsumoDiaSemanaArray);
+		sessionStorage["diaMenorConsumo"]=getDiaMenorConsumo(mediasConsumoDiaSemanaArray);
+		sessionStorage["result"]=JSON.stringify(dataArray[0]);
+		sessionStorage["mes"]=mes;
+		sessionStorage["año"]=año;
+		
+		
+		crearDatepicker(dataArray);
+
+		$("#datepicker-consumo").change(function(){
+			var preciosDia;
+			
+			fechaStr = $("#datepicker-consumo").val();
+
+			fechaStr = fechaStr.split("-");
+			fecha = fechaStr[2]+"/"+fechaStr[1]+"/"+fechaStr[0];
+			dataSet = createDayDataSet(fecha,dataArray);
+
+			dibujaChartConsumoHoras(JSON.stringify(dataSet),fecha,"consumos-dia-chart");
+		});
+	});
+	
+	
+	//###########################################
+	//###########################################
+	//###########################################
+	
+	
 
 	$("#read-consumo-file").click(function(){
 		//Set resultsArray a null para empezar de 0 una nueva carga de archivos
@@ -193,25 +268,33 @@ $(document).ready(function(){
 				dibujaChartPorcentajeConsumoLaborablesFinSemana(consumoDiasSemanaArray, 'laborables-chart');
 				dibujaChartPorcentajeConsumoHorasBaratas(resultsArray, 'tramos-chart');
 				
+				var fecha = resultsArray[0].data[0].Fecha;
+				var fechaArray = fecha.split("/");
+				var mes = meses[parseInt(fechaArray[1])-1]
+				var año = fechaArray[2];
+				
 				sessionStorage["loadedCSV"]=csvLoaded;
 				sessionStorage["porcentajeLaborables"]=porcentajeConsumoDiasLaborables(consumoDiasSemanaArray);
 				sessionStorage["porcentajeTramoBarato"]=calculaPorcentajeTramoBarato(resultsArray);
 				sessionStorage["diaMayorConsumo"]=getDiaMayorConsumo(mediasConsumoDiaSemanaArray);
 				sessionStorage["diaMenorConsumo"]=getDiaMenorConsumo(mediasConsumoDiaSemanaArray);
 				sessionStorage["result"]=JSON.stringify(resultsArray[0]);
-			
+				sessionStorage["mes"]=mes;
+				sessionStorage["año"]=año;
 				
 				if(userId != null){
 					var fecha = resultsArray[0].data[0].Fecha;
 					var fechaArray = fecha.split("/");
 					var mes = meses[parseInt(fechaArray[1])-1]
-					var jsonConsumo = JSON.stringify(resultsArray[0]);
+					//var jsonConsumo = JSON.stringify(resultsArray[0]);
+					var jsonConsumo = getResultString(resultsArray[0]);
+					
 					var consumoTotal = getConsumoTotal(resultsArray);
 					var porcentajeLaborables = porcentajeConsumoDiasLaborables(consumoDiasSemanaArray);
 					var porcentajeTramoBarato = calculaPorcentajeTramoBarato(resultsArray);
 					
-					var jsonString = '{"userId":'+userId+', "fecha":"'+fecha+'","mes":"'+mes+'","año":"'+fechaArray[2]+'", "json":'+jsonConsumo+
-						', "consumoPorDia":"'+consumoDiasSemanaArray+'", "consumoTotal":'+consumoTotal.toFixed(2)+
+					var jsonString = '{"userId":'+userId+', "fecha":"'+fecha+'","mes":"'+mes+'","año":"'+fechaArray[2]+'", "json":"'+jsonConsumo+
+						'", "consumoPorDia":"'+consumoDiasSemanaArray+'", "consumoTotal":'+consumoTotal.toFixed(2)+
 						', "porcentajeLaborables":'+porcentajeLaborables+',"porcentajeTramoBarato":'+porcentajeTramoBarato+'}';
 
 					
@@ -222,11 +305,11 @@ $(document).ready(function(){
 						dataType: "json",
 						
 						success: function(response){
-							
+							console.log("PETICIÓN CORRECTA");
 						},
 					
 						error: function(xhr, status){
-							console.log("ERROR EN LA PETICIÓN");
+							console.log("ERROR EN LA PETICIÓN "+status);
 						}
 					});
 				}

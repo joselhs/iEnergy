@@ -143,7 +143,7 @@ $(document).ready(function(){
 					preciosHoy = preciosHoyNoDisc;
 				}
 
-
+			
 				dibujaChartPreciosHoras(preciosHoy, precioUsuario,  yMax, yMin, "precios-dia-chart");
 			},
 		

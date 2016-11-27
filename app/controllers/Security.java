@@ -4,7 +4,7 @@ import models.User;
 
 public class Security extends Secure.Security{
 	
-	static boolean authenticate(String email, String password) {
+	public static boolean authenticate(String email, String password) {
 		boolean allowed;
 		
 		User user = User.find("byEmail", email).first();

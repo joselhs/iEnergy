@@ -22,7 +22,7 @@ import service.ReeClient;
 import util.CalendarUtil;
 import util.XML;
 
-@On("0 30 17 * * ?")
+@On("0 02 0 * * ?")
 public class ActualizaPerfilDiarioJob extends Job {
 	
 	public void doJob() {	
@@ -35,7 +35,7 @@ public class ActualizaPerfilDiarioJob extends Job {
 		Logger.info("\nInicio función getPerfil()\n");
 		String url = String.format(Play.configuration.getProperty("ReeClient.PerfilesConsumo.baseUrl"), getDayDate());
 		Logger.info("\nURL solicitada="+url+"\n");		
-		PerfilConsumo object = ReeClient.getPerfiles(url);
+		PerfilConsumo object = ReeClient.getPerfiles("https://api.esios.ree.es/archives/78/download?date=2016-02-01");
 		
 		PConsumo pc = new PConsumo();
 		

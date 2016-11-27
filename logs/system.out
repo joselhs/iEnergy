@@ -5,3 +5,4 @@ Listening for transport dt_socket at address: 8000
 01:50:03,657 WARN  ~ You're running Play! in DEV mode
 01:50:03,716 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...
 ~ Server is up and running
+Listening for transport dt_socket at address: 8000

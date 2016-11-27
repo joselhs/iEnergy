@@ -363,9 +363,11 @@ function dibujaChartMediasDiasSemana(consumosArray,selector){
 //##################################################################################
 //############################# CONSUMOS POR HORAS DIA #############################
 //##################################################################################
-	function dibujaChartConsumoHoras(dataset,fecha,selector){
+	function dibujaChartConsumoHoras(dataset,preciosHoy,fecha,selector){
 
 		dataset = JSON.parse(dataset);
+		preciosDia = JSON.parse(preciosHoy);
+		console.log(preciosDia);
 		
 		var chartConsumoHoras = new Highcharts.Chart({
 			
@@ -380,13 +382,27 @@ function dibujaChartMediasDiasSemana(consumosArray,selector){
 	        subtitle: {
 	            text: "Fecha: "+fecha
 	        },
-	        yAxis: {
+	        yAxis: [{
 	          max: getMax(dataSet)+0.02,
 	          min: 0,
 	          title: {
-	              text: 'Consumo (kWh)'
+	              text: 'Consumo (kWh)',
+	              style: {
+	                    color: "#F46C3C"
+	                }
 	          },
 	        },
+	        {
+	        	max: 0.15,
+		        min: 0.05,
+		        title: {
+		           text: 'Precios (€/kWh)',
+		           style: {
+	                    color: "#4A90E2"
+	                }
+		        },
+		        opposite: true
+	        }],
 
 	        legend: {
           	enabled: true
@@ -412,12 +428,12 @@ function dibujaChartMediasDiasSemana(consumosArray,selector){
 		          }
 		    },
 		    tooltip: {
-	            valueSuffix: 'kWh'
+	            shared:true
 		    },
 		    xAxis: {
 	            categories: ['1:00', '2:00', '3:00', '4:00', '5:00', '6:00', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00','13:00','14:00',
 	                         '15:00','16:00','17:00','18:00','19:00','20:00','21:00','22:00','23:00','24:00']
-	        	,
+	        	,crosshair: true,
 	        	labels: {
 	                rotation: -45
 	            }
@@ -429,7 +445,16 @@ function dibujaChartMediasDiasSemana(consumosArray,selector){
 	            data: [dataset[0],dataset[1],dataset[2],dataset[3],dataset[4],dataset[5],dataset[6],dataset[7],
 				       dataset[8],dataset[9],dataset[10],dataset[11],dataset[12],dataset[13],dataset[14],dataset[15],
 				       dataset[16],dataset[17],dataset[18],dataset[19],dataset[20],dataset[21],dataset[22],dataset[23]]
-	        }]
+	        }
+		    ,{
+	        	name: "Precios del día por Horas",
+	        	dataLabels:false,
+	        	data: preciosDia,
+	        	color: "#4A90E2",
+	        	type: "line",
+	        	yAxis: 1
+	        }
+	        ]
 		        
 		});
 

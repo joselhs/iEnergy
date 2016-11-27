@@ -1,0 +1,51 @@
+22 nov 2016 19:11:16,450 INFO  ~ Starting /Users/josholsan/Documents/Projects/energySaving/.
+22 nov 2016 19:11:21,804 INFO  ~ Module secure is available (/Applications/play-1.4.3/modules/secure)
+22 nov 2016 19:11:22,405 WARN  ~ You're running Play! in DEV mode
+22 nov 2016 19:11:31,329 ERROR ~ Unable to set localhost. This prevents creation of a GUID. Cause was: MacBook-Pro-de-Jose.local: MacBook-Pro-de-Jose.local: nodename nor servname provided, or not known
+java.net.UnknownHostException: MacBook-Pro-de-Jose.local: MacBook-Pro-de-Jose.local: nodename nor servname provided, or not known
+	at java.net.InetAddress.getLocalHost(InetAddress.java:1475)
+	at net.sf.ehcache.Cache.<clinit>(Cache.java:214)
+	at net.sf.ehcache.config.ConfigurationHelper.createCache(ConfigurationHelper.java:296)
+	at net.sf.ehcache.config.ConfigurationHelper.createDefaultCache(ConfigurationHelper.java:219)
+	at net.sf.ehcache.CacheManager.configure(CacheManager.java:722)
+	at net.sf.ehcache.CacheManager.doInit(CacheManager.java:439)
+	at net.sf.ehcache.CacheManager.init(CacheManager.java:377)
+	at net.sf.ehcache.CacheManager.<init>(CacheManager.java:259)
+	at net.sf.ehcache.CacheManager.newInstance(CacheManager.java:1037)
+	at net.sf.ehcache.CacheManager.newInstance(CacheManager.java:818)
+	at net.sf.ehcache.CacheManager.create(CacheManager.java:799)
+	at play.cache.EhCacheImpl.<init>(EhCacheImpl.java:32)
+	at play.cache.EhCacheImpl.newInstance(EhCacheImpl.java:42)
+	at play.cache.Cache.init(Cache.java:243)
+	at play.Play.start(Play.java:535)
+	at play.test.PlayJUnitRunner.<init>(PlayJUnitRunner.java:38)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:57)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:526)
+	at org.junit.internal.builders.AnnotatedBuilder.buildRunner(AnnotatedBuilder.java:104)
+	at org.junit.internal.builders.AnnotatedBuilder.runnerForClass(AnnotatedBuilder.java:86)
+	at org.junit.runners.model.RunnerBuilder.safeRunnerForClass(RunnerBuilder.java:59)
+	at org.junit.internal.builders.AllDefaultPossibilitiesBuilder.runnerForClass(AllDefaultPossibilitiesBuilder.java:26)
+	at org.junit.runners.model.RunnerBuilder.safeRunnerForClass(RunnerBuilder.java:59)
+	at org.junit.internal.requests.ClassRequest.getRunner(ClassRequest.java:33)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestLoader.createUnfilteredTest(JUnit4TestLoader.java:84)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestLoader.createTest(JUnit4TestLoader.java:70)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestLoader.loadTests(JUnit4TestLoader.java:43)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:444)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)
+Caused by: java.net.UnknownHostException: MacBook-Pro-de-Jose.local: nodename nor servname provided, or not known
+	at java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+	at java.net.InetAddress$1.lookupAllHostAddr(InetAddress.java:901)
+	at java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1295)
+	at java.net.InetAddress.getLocalHost(InetAddress.java:1471)
+	... 32 more
+22 nov 2016 19:11:36,828 INFO  ~ Connected to jdbc:mysql://localhost/energy_saving?useUnicode=yes&connectionCollation=utf8_general_ci&characterEncoding=UTF-8 for default
+22 nov 2016 19:11:36,999 INFO  ~ JPA -> Adding package: models.ree.desgloses
+22 nov 2016 19:11:37,029 INFO  ~ JPA -> Adding package: notifiers
+22 nov 2016 19:11:37,029 INFO  ~ JPA -> Adding package: service
+22 nov 2016 19:11:37,029 INFO  ~ JPA -> Adding package: models.ree.perfiles
+22 nov 2016 19:11:37,488 WARN  ~ HSEARCH000075: Configuration setting hibernate.search.lucene_version was not specified, using LUCENE_CURRENT.
+22 nov 2016 19:11:37,801 INFO  ~ Application 'energySaving' is now started !

@@ -46,9 +46,34 @@ $(document).ready(function(){
 		dibujaChartConsumoDiasPeriodoFacturacion(consumosPorDiaMesArray,diasPeriodo,'consumos-periodo-chart');
 		
 		//Dibuja gráfica consumo por horas del día 
-		fechaStr = calculateMinDate(dataArray);
-		dataSet = createDayDataSet(fechaStr,dataArray);
-		dibujaChartConsumoHoras(JSON.stringify(dataSet), null, fechaStr, "consumos-dia-chart");
+		
+		//transformaciones de fechas para petición AJAX y para uso en createDayDataSet
+		var fechaIniStr = dataArray[0].data[0].Fecha;
+		fechaIniArray = fechaIniStr.split("/");
+		var fechaIni = fechaIniArray[2]+"-"+fechaIniArray[1]+"-"+fechaIniArray[0];
+		fechaIni = {"fecha" : fechaIni};
+		var dirUrl = "/getgraficadia";
+		
+		$.ajax({
+			url: dirUrl,//url de destino
+			data: fechaIni,
+			type: "get",
+			dataType: "text",
+			
+			success: function(response){
+				response = response.split("/");
+				preciosHoy = response[0];
+
+				dataSet = createDayDataSet(fechaIniStr,dataArray);
+
+				dibujaChartConsumoHoras(JSON.stringify(dataSet),preciosHoy,fechaIniStr,"consumos-dia-chart");
+
+			},
+		
+			error: function(xhr, status){
+				console.log("ERROR EN LA PETICIÓN");
+			}
+		});
 		
 		//Dibuja las gráficas del apartado otros
 		consumoDiasSemanaArray = calculaConsumosDiasSemana(dataArray);

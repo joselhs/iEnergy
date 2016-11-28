@@ -393,7 +393,7 @@ function dibujaChartMediasDiasSemana(consumosArray,selector){
 	        },
 	        {
 	        	max: 0.15,
-		        min: 0.05,
+		        min: 0.06,
 		        title: {
 		           text: 'Precios (€/kWh)',
 		           style: {

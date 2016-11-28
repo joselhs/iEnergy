@@ -31,7 +31,7 @@ public class ActualizaDesgloseDiarioJob extends Job {
 	private void getDesglose(){
 		String url = String.format(Play.configuration.getProperty("ReeClient.baseUrl"), getDayDate());
 				
-		PVPCDesgloseHorario object = ReeClient.getDesgloses("https://api.esios.ree.es/archives/80/download?date=2016-02-01");
+		PVPCDesgloseHorario object = ReeClient.getDesgloses(url);
 		
 		DesgloseHorario pvpc = new DesgloseHorario();
 		String xml = XML.writeValueAsString(object, false);

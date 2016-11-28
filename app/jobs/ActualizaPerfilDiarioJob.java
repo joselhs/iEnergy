@@ -35,7 +35,7 @@ public class ActualizaPerfilDiarioJob extends Job {
 		Logger.info("\nInicio función getPerfil()\n");
 		String url = String.format(Play.configuration.getProperty("ReeClient.PerfilesConsumo.baseUrl"), getDayDate());
 		Logger.info("\nURL solicitada="+url+"\n");		
-		PerfilConsumo object = ReeClient.getPerfiles("https://api.esios.ree.es/archives/78/download?date=2016-02-01");
+		PerfilConsumo object = ReeClient.getPerfiles(url);
 		
 		PConsumo pc = new PConsumo();
 		

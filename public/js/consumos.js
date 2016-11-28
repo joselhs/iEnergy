@@ -154,9 +154,6 @@ $(document).ready(function(){
 		$('#laborables-chart').css("display","block");
 	});
 	
-	$("#consumos-otros-button").click(function(){
-		
-	});
 	
 	
 	
@@ -187,9 +184,34 @@ $(document).ready(function(){
 		dibujaChartConsumoDiasPeriodoFacturacion(consumosPorDiaMesArray,diasPeriodo,'consumos-periodo-chart');
 		
 		//Dibuja gráfica consumo por horas del día 
-		fechaStr = calculateMinDate(dataArray);
-		dataSet = createDayDataSet(fechaStr,dataArray);
-		dibujaChartConsumoHoras(JSON.stringify(dataSet), null, fechaStr, "consumos-dia-chart");
+		
+		//transformaciones de fechas para petición AJAX y para uso en createDayDataSet
+		var fechaIniStr = dataArray[0].data[0].Fecha;
+		fechaIniArray = fechaIniStr.split("/");
+		var fechaIni = fechaIniArray[2]+"-"+fechaIniArray[1]+"-"+fechaIniArray[0];
+		fechaIni = {"fecha" : fechaIni};
+		var dirUrl = "/getgraficadia";
+		
+		$.ajax({
+			url: dirUrl,//url de destino
+			data: fechaIni,
+			type: "get",
+			dataType: "text",
+			
+			success: function(response){
+				response = response.split("/");
+				preciosHoy = response[0];
+
+				dataSet = createDayDataSet(fechaIniStr,dataArray);
+
+				dibujaChartConsumoHoras(JSON.stringify(dataSet),preciosHoy,fechaIniStr,"consumos-dia-chart");
+
+			},
+		
+			error: function(xhr, status){
+				console.log("ERROR EN LA PETICIÓN");
+			}
+		});
 		
 		//Dibuja las gráficas del apartado otros
 		consumoDiasSemanaArray = calculaConsumosDiasSemana(dataArray);
@@ -335,9 +357,34 @@ $(document).ready(function(){
 				dibujaChartConsumoDiasPeriodoFacturacion(consumosPorDiaMesArray,diasPeriodo,'consumos-periodo-chart');
 				
 				//Dibuja gráfica consumo por horas del día 
-				fechaStr = calculateMinDate(resultsArray);
-				dataSet = createDayDataSet(fechaStr,resultsArray);
-				dibujaChartConsumoHoras(JSON.stringify(dataSet), null, fechaStr, "consumos-dia-chart");
+				
+				//transformaciones de fechas para petición AJAX y para uso en createDayDataSet
+				var fechaIniStr = resultsArray[0].data[0].Fecha;
+				fechaIniArray = fechaIniStr.split("/");
+				var fechaIni = fechaIniArray[2]+"-"+fechaIniArray[1]+"-"+fechaIniArray[0];
+				fechaIni = {"fecha" : fechaIni};
+				var dirUrl = "/getgraficadia";
+				
+				$.ajax({
+					url: dirUrl,//url de destino
+					data: fechaIni,
+					type: "get",
+					dataType: "text",
+					
+					success: function(response){
+						response = response.split("/");
+						preciosHoy = response[0];
+
+						dataSet = createDayDataSet(fechaIniStr,resultsArray);
+
+						dibujaChartConsumoHoras(JSON.stringify(dataSet),preciosHoy,fechaIniStr,"consumos-dia-chart");
+
+					},
+				
+					error: function(xhr, status){
+						console.log("ERROR EN LA PETICIÓN");
+					}
+				});
 				
 				//Dibuja las gráficas del apartado otros
 				consumoDiasSemanaArray = calculaConsumosDiasSemana(resultsArray);
@@ -390,6 +437,7 @@ $(document).ready(function(){
 			fechaStr = $("#datepicker-consumo").val();
 			
 			var fecha_seleccionada = {"fecha" : $("#datepicker-consumo").val()};
+			console.log(fechaStr);
 			var dirUrl = "/getgraficadia";
 			
 			$.ajax({
@@ -404,7 +452,7 @@ $(document).ready(function(){
 
 					fechaStr = fechaStr.split("-");
 					fecha = fechaStr[2]+"/"+fechaStr[1]+"/"+fechaStr[0];
-					dataSet = createDayDataSet(fecha,dataArray);
+					dataSet = createDayDataSet(fecha,resultsArray);
 
 					dibujaChartConsumoHoras(JSON.stringify(dataSet),preciosHoy,fecha,"consumos-dia-chart");
 

@@ -1,7 +1,7 @@
-22 nov 2016 19:11:16,450 INFO  ~ Starting /Users/josholsan/Documents/Projects/energySaving/.
-22 nov 2016 19:11:21,804 INFO  ~ Module secure is available (/Applications/play-1.4.3/modules/secure)
-22 nov 2016 19:11:22,405 WARN  ~ You're running Play! in DEV mode
-22 nov 2016 19:11:31,329 ERROR ~ Unable to set localhost. This prevents creation of a GUID. Cause was: MacBook-Pro-de-Jose.local: MacBook-Pro-de-Jose.local: nodename nor servname provided, or not known
+28 nov 2016 05:13:58,007 INFO  ~ Starting /Users/josholsan/Documents/Projects/energySaving/.
+28 nov 2016 05:14:03,359 INFO  ~ Module secure is available (/Applications/play-1.4.3/modules/secure)
+28 nov 2016 05:14:03,950 WARN  ~ You're running Play! in DEV mode
+28 nov 2016 05:14:10,682 ERROR ~ Unable to set localhost. This prevents creation of a GUID. Cause was: MacBook-Pro-de-Jose.local: MacBook-Pro-de-Jose.local: nodename nor servname provided, or not known
 java.net.UnknownHostException: MacBook-Pro-de-Jose.local: MacBook-Pro-de-Jose.local: nodename nor servname provided, or not known
 	at java.net.InetAddress.getLocalHost(InetAddress.java:1475)
 	at net.sf.ehcache.Cache.<clinit>(Cache.java:214)
@@ -42,10 +42,10 @@ Caused by: java.net.UnknownHostException: MacBook-Pro-de-Jose.local: nodename no
 	at java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1295)
 	at java.net.InetAddress.getLocalHost(InetAddress.java:1471)
 	... 32 more
-22 nov 2016 19:11:36,828 INFO  ~ Connected to jdbc:mysql://localhost/energy_saving?useUnicode=yes&connectionCollation=utf8_general_ci&characterEncoding=UTF-8 for default
-22 nov 2016 19:11:36,999 INFO  ~ JPA -> Adding package: models.ree.desgloses
-22 nov 2016 19:11:37,029 INFO  ~ JPA -> Adding package: notifiers
-22 nov 2016 19:11:37,029 INFO  ~ JPA -> Adding package: service
-22 nov 2016 19:11:37,029 INFO  ~ JPA -> Adding package: models.ree.perfiles
-22 nov 2016 19:11:37,488 WARN  ~ HSEARCH000075: Configuration setting hibernate.search.lucene_version was not specified, using LUCENE_CURRENT.
-22 nov 2016 19:11:37,801 INFO  ~ Application 'energySaving' is now started !
+28 nov 2016 05:14:16,199 INFO  ~ Connected to jdbc:mysql://localhost/energy_saving?useUnicode=yes&connectionCollation=utf8_general_ci&characterEncoding=UTF-8 for default
+28 nov 2016 05:14:16,391 INFO  ~ JPA -> Adding package: models.ree.desgloses
+28 nov 2016 05:14:16,422 INFO  ~ JPA -> Adding package: notifiers
+28 nov 2016 05:14:16,423 INFO  ~ JPA -> Adding package: service
+28 nov 2016 05:14:16,423 INFO  ~ JPA -> Adding package: models.ree.perfiles
+28 nov 2016 05:14:16,877 WARN  ~ HSEARCH000075: Configuration setting hibernate.search.lucene_version was not specified, using LUCENE_CURRENT.
+28 nov 2016 05:14:17,188 INFO  ~ Application 'energySaving' is now started !

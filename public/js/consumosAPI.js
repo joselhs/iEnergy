@@ -367,7 +367,6 @@ function dibujaChartMediasDiasSemana(consumosArray,selector){
 
 		dataset = JSON.parse(dataset);
 		preciosDia = JSON.parse(preciosHoy);
-		console.log(preciosDia);
 		
 		var chartConsumoHoras = new Highcharts.Chart({
 			

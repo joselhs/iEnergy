@@ -6,6 +6,7 @@ import org.javatuples.Quartet;
 
 import com.jamonapi.utils.Logger;
 
+import jobs.UpdateAllCoeficientesJob;
 import models.PConsumo;
 import models.ree.perfiles.PerfilConsumo;
 import play.Play;
@@ -18,31 +19,7 @@ import util.XML;
 
 public class PerfilesConsumo extends AbstractBaseController{
 
-		
-//	public static void getXML(String fileName,String fileType, String idioma){
-//		
-//		
-//		
-//		PerfilConsumoType object = ReeClient.getPerfil(fileName, fileType, idioma);
-//		PConsumo pc = new PConsumo();
-//		String xml = XML.writeValueAsString(object, false);
-//		String idMensaje = object.getIdentificacionMensaje().getV();
-//		
-//		pc.idArchivo =idMensaje;
-//		pc.fecha=object.getFechaHoraMensaje().getV().toGregorianCalendar().getTime();
-//		pc.xml = xml;
-//		
-//		if(existsInDB(pc)){
-//
-//		}else{
-//			pc.save();
-//		}
-//		
-//		List<Quartet<String,String,String,String>> coeficientes = ReeClient.getCoeficientesPerfilado(object);
-//		ReeClient.setCoeficientesPerfilado(coeficientes);
-//				
-//    }
-	
+
 	public static boolean existsInDB(PConsumo pc){
 		
 		if(!PConsumo.find("byIdArchivo", pc.idArchivo).fetch().isEmpty()){
@@ -61,7 +38,7 @@ public class PerfilesConsumo extends AbstractBaseController{
         
         validation.valid(object);
         if (validation.hasErrors()) {
-//            renderShow(object);
+        	Logger.log("ERROR");
         }
         object.save();
         flash.success(Messages.get("crud.saved", object.getLabel()));
@@ -129,6 +106,27 @@ public class PerfilesConsumo extends AbstractBaseController{
     		redirect(request.controller + ".renderupdate");
     	}	
 		 	
+    }
+    
+    
+    public static void updateAllXML(){
+
+    	double t1, t2;
+        t1 = System.currentTimeMillis();
+    	
+    	Promise<List<PerfilConsumo>> promise = new UpdateAllCoeficientesJob().now();
+    	List<PerfilConsumo> lista = await(promise);
+    	ReeClient.updateAllCoeficientesHoras(lista);
+    	Logger.log("FINNNN!");
+    	Logger.log("######################################################################");
+    	t2 = System.currentTimeMillis();
+    	
+    	Logger.log("Tiempo de inicio: "+t1);
+		Logger.log("Tiempo de fin: "+t2);
+		Logger.log("Tiempo total: "+((t2-t1)/1000.0)/60+"min");
+		Logger.log("######################################################################");
+		flash.success(Messages.get("crud.updated"));
+    	
     }
     
 }

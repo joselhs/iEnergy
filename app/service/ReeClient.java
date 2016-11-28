@@ -558,4 +558,30 @@ public class ReeClient {
 		 return dias;
 	 }
 	
+	
+	
+	public static void updateAllPreciosHoras(List<PVPCDesgloseHorario> desgloses){
+		 int i = 0;
+		 for(PVPCDesgloseHorario desglose : desgloses){
+				List<Septet<String,String,String,String,String,String,Boolean>> precios = getPreciosHoras(desglose);
+				setPreciosHoras(precios);  
+				calculaPrecioMedioDia(precios);
+				Logger.info(i+" PRECIO ACTUALIZADO!!"+"- Dia: "+desglose.getHorizonte().getV());
+				i++;
+		 }
+			 
+			
+	 }
+	 
+	 public static void updateAllCoeficientesHoras(List<PerfilConsumo> perfiles){
+		 int i = 0;
+		 for(PerfilConsumo perfil : perfiles){
+			 List<Quartet<String,String,String,String>> coeficientes = getCoeficientesPerfilado(perfil);
+			 setCoeficientesPerfilado(coeficientes);
+			 Logger.info(i+" COEFICIENTE ACTUALIZADO!!"+"- Dia: "+perfil.getHorizonte().getV());
+			 i++;
+		 }
+		 
+	 }
+	
 }

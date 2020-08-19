@@ -13,7 +13,17 @@ To run the WebApp in a local environment, you should follow the next steps:
 
 ## Screenshots
 
+### Daily price comparison
+<img src="https://github.com/joselhs/iEnergy/blob/master/documentation/images/screenshot2.png?raw=true" width="900" height="500">
 
+### Personal consumption by hour
+<img src="https://github.com/joselhs/iEnergy/blob/master/documentation/images/screenshot1.png?raw=true" width="900" height="500">
+
+### Personal consumption by day of billing period
+<img src="https://github.com/joselhs/iEnergy/blob/master/documentation/images/screenshot3.png?raw=true" width="900" height="500">
+
+### General and personalized recommendations
+<img src="https://github.com/joselhs/iEnergy/blob/master/documentation/images/screenshot4.png?raw=true" width="900" height="500">
 
 
 
